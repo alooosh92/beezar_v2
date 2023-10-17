@@ -76,22 +76,38 @@ class _ShowListItemWidgetState extends State<ShowListItemWidget> {
               }
             } else {
               AddItemController addItemController = Get.find();
-              progressDef();
-              var b = await addItemController.deleteItem(widget.list[index].id);
-              if (b) {
-                Get.back();
-                Get.snackbar("معلومات", "تم حذف الاعلان بنجاح",
-                    backgroundColor: ColorManager.primaryColor,
-                    colorText: ColorManager.white);
-                setState(() {
-                  widget.list.remove(widget.list[index]);
-                });
-              } else {
-                Get.back();
-                Get.snackbar("خطأ", "حدث خطأ ما الرجاء الاتصال بالمسؤول",
-                    backgroundColor: ColorManager.primaryColor,
-                    colorText: ColorManager.white);
-              }
+              Get.dialog(AlertDialog(
+                actions: [
+                  TextButton(
+                      onPressed: () async {
+                        progressDef();
+                        var b = await addItemController
+                            .deleteItem(widget.list[index].id);
+                        if (b) {
+                          Get.back();
+                          Get.back();
+                          Get.snackbar("معلومات", "تم حذف الاعلان بنجاح",
+                              backgroundColor: ColorManager.primaryColor,
+                              colorText: ColorManager.white);
+                          setState(() {
+                            widget.list.remove(widget.list[index]);
+                          });
+                        } else {
+                          Get.back();
+                          Get.back();
+                          Get.snackbar(
+                              "خطأ", "حدث خطأ ما الرجاء الاتصال بالمسؤول",
+                              backgroundColor: ColorManager.primaryColor,
+                              colorText: ColorManager.white);
+                        }
+                      },
+                      child: const Text("حذف")),
+                  TextButton(
+                      onPressed: () => Get.back(), child: const Text("إلغاء"))
+                ],
+                content: const Text("هل انت متأكد من حذف الاعلان؟"),
+                title: const Text("تنبيه"),
+              ));
             }
           },
         );

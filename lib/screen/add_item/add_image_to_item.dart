@@ -4,6 +4,7 @@ import 'package:beezar_v2/screen/add_item/widget/appbar_add_item.dart';
 import 'package:beezar_v2/screen/add_item/widget/image_viewer.dart';
 import 'package:beezar_v2/screen/add_item/widget/row_add_and_delete_image.dart';
 import 'package:beezar_v2/screen/contact_us/widget/button_send.dart';
+import 'package:beezar_v2/screen/home/home_controller.dart';
 import 'package:beezar_v2/screen/home/primer_screen.dart';
 import 'package:beezar_v2/widget/progress_def.dart';
 import 'package:beezar_v2/widget/progress_home_row.dart';
@@ -50,6 +51,8 @@ class AddImageToItem extends StatelessWidget {
                             Get.snackbar("معلومات", "تم اضافة الاعلان بنجاح ",
                                 backgroundColor: ColorManager.primaryColor,
                                 colorText: ColorManager.white);
+                            HomeController homeController = Get.find();
+                            await homeController.getAllItems(true);
                             Get.offAll(const PrimerScreen());
                           } else {
                             Get.snackbar(
@@ -63,6 +66,8 @@ class AddImageToItem extends StatelessWidget {
                             Get.snackbar("معلومات", "تم تعديل الاعلان بنجاح ",
                                 backgroundColor: ColorManager.primaryColor,
                                 colorText: ColorManager.white);
+                            HomeController homeController = Get.find();
+                            await homeController.getAllItems(true);
                             Get.offAll(const PrimerScreen());
                           } else {
                             Get.snackbar(

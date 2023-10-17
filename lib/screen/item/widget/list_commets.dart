@@ -29,7 +29,7 @@ class ListCommets extends StatelessWidget {
             ),
           );
         }
-        return GetBuilder<ItemController>(
+        return GetX<ItemController>(
           init: itemController,
           builder: (controller) => ListView.builder(
             itemCount: controller.listComment.length,

@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 class ItemController extends GetxController {
   PageController pageController = PageController();
   RxInt pagenum = 0.obs;
-  List<CommentModel> listComment = [];
+  RxList<CommentModel> listComment = RxList<CommentModel>();
 
   void changeimage(int val) {
     pagenum.value = val;
@@ -20,12 +20,14 @@ class ItemController extends GetxController {
         headers: Hostting().getHeader());
     List<CommentModel> list = [];
     if (response.statusCode == 200) {
+      listComment.clear();
       var body = jsonDecode(response.body);
       for (var element in body["data"]) {
+        listComment.add(CommentModel.fromJson(element));
         list.add(CommentModel.fromJson(element));
       }
     }
-    listComment = list;
+    refresh();
     return list;
   }
 
@@ -37,7 +39,6 @@ class ItemController extends GetxController {
     if (response.statusCode == 200) {
       await getComment(id);
       Get.back();
-      update();
       return true;
     }
     Get.back();
@@ -53,7 +54,6 @@ class ItemController extends GetxController {
     if (response.statusCode == 200) {
       await getComment(itemId);
       Get.back();
-      update();
       return true;
     }
     Get.back();

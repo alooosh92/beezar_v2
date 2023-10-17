@@ -68,7 +68,7 @@ class ContactUsScreen extends StatelessWidget {
                   controller: massege,
                   keyboard: TextInputType.text,
                   label: "نص الرسالة",
-                  minLine: 4,
+                  minLine: 3,
                 ),
                 ButtonSend(press: () {}, hint: "ارسال"),
                 const RowIcon()

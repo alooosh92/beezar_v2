@@ -10,6 +10,7 @@ class ItemModel {
   late int? subCategoryId;
   late List<String>? images;
   late bool favorite;
+  late DateTime date;
 
   ItemModel(
       {required this.address,
@@ -22,7 +23,8 @@ class ItemModel {
       required this.price,
       required this.subCategoryId,
       required this.username,
-      required this.favorite});
+      required this.favorite,
+      required this.date});
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
     List<String> imas = [];
@@ -40,6 +42,7 @@ class ItemModel {
       phone: json["number_user"],
       price: double.parse(json["price"].toString()),
       subCategoryId: json["sub_category_id"],
+      date: DateTime.parse((json["created_at"] ?? DateTime.now()).toString()),
       favorite: false,
     );
   }

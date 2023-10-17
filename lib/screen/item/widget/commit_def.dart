@@ -1,6 +1,7 @@
 import 'package:beezar_v2/res/color_manager.dart';
 import 'package:beezar_v2/res/font_def.dart';
 import 'package:beezar_v2/screen/item/item_controller.dart';
+import 'package:beezar_v2/widget/change_date_to_day.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,12 +66,12 @@ class CommitDef extends StatelessWidget {
                 style: FontDef.w400S14Cg,
               ),
               Text(
-                date.toString().substring(0, 15),
+                changeDateToDay(date),
                 style: FontDef.w400S14Cg,
               )
             ],
           ),
-          Divider()
+          const Divider()
         ],
       ),
     );
