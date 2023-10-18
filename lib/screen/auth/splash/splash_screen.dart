@@ -13,7 +13,6 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-double _size = 0;
 AuthController _authController = Get.find();
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -41,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           }
-          Timer(const Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 2), () {
             if (_authController.checkUser!) {
               Get.offAll(const PrimerScreen());
             } else {
