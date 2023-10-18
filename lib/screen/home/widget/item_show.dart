@@ -3,6 +3,7 @@ import 'package:beezar_v2/screen/home/widget/list_sub_categories.dart';
 import 'package:beezar_v2/screen/home/widget/list_view_sub_categories_item.dart';
 import 'package:beezar_v2/screen/home/widget/row_item_home.dart';
 import 'package:beezar_v2/screen/home/widget/row_show_all.dart';
+import 'package:beezar_v2/screen/show_all_item/show_all_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,16 +21,21 @@ class ItemShow extends StatelessWidget {
         if (controller.categore.value == -1) {
           return Column(
             children: [
-              RowShowAll(press: () {}, text: "المضافة حديثاً"),
+              RowShowAll(
+                  press: () {
+                    Get.to(const ShowAllItem());
+                  },
+                  text: "المضافة حديثاً",
+                  showMore: true),
               RowItemHome(
                   future: homeController.getAllItems(false),
-                  sizeH: 160,
-                  sizeW: 125),
+                  sizeH: 205,
+                  sizeW: 140),
               RowShowAll(press: () {}, text: "المفضلة"),
               RowItemHome(
                   future: homeController.getFavourite(null),
-                  sizeH: 200,
-                  sizeW: 140),
+                  sizeH: 165,
+                  sizeW: 125),
             ],
           );
         } else {

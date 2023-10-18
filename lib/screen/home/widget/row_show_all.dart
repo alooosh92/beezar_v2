@@ -6,9 +6,11 @@ class RowShowAll extends StatelessWidget {
     super.key,
     required this.press,
     required this.text,
+    this.showMore,
   });
   final String text;
   final void Function() press;
+  final bool? showMore;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,13 +20,16 @@ class RowShowAll extends StatelessWidget {
           text,
           style: FontDef.w500S15Cb,
         ),
-        // TextButton(
-        //   onPressed: press,
-        //   child: const Text(
-        //     "شاهد الكل",
-        //     style: FontDef.w500S12Cp,
-        //   ),
-        // ),
+        Visibility(
+          visible: showMore ?? false,
+          child: TextButton(
+            onPressed: press,
+            child: const Text(
+              "شاهد المزيد",
+              style: FontDef.w500S12Cp,
+            ),
+          ),
+        ),
       ],
     );
   }
