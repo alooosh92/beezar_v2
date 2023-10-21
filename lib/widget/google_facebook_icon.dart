@@ -87,7 +87,8 @@ Future signinGoogle() async {
       duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.BOTTOM,
     );
-    Get.to(const HomeScreen());
+    print(user.email);
+    // Get.to(const HomeScreen());
 
   }
 }

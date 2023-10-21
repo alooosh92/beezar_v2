@@ -53,16 +53,16 @@ android {
     }
 
     signingConfigs {
-        debug {
+        release  {
             keyAlias "androiddebugkey"
             storePassword "android"
-            storeFile file("beezarkeyv2.jks")
+            storeFile file("mykeystore.jks")
             keyPassword "android"
         }
     }
 
     buildTypes {
-        debug {
+        release  {
             // TODO: Add your own signing config for the release build.
             signingConfig signingConfigs.debug
         }
