@@ -111,17 +111,9 @@ class AuthController extends GetxController {
   }
 
   Future<bool> updateUser(UserModel userModel) async {
-    http.MultipartRequest request =
-        http.MultipartRequest("post", Hostting.updateUser);
-    request.headers.addAll(Hostting().getHeader());
-    request.fields["name"] = userModel.name!;
-    request.fields["email"] = userModel.email!;
-    request.fields["address"] = userModel.address!;
-    request.fields["phone"] = userModel.phone!;
-    request.files.add(await http.MultipartFile.fromPath(
-        "image", "lib/assets/images/addToPerson.jpg"));
-    var respons = await request.send();
-    if (respons.statusCode == 200) {
+    http.Response response = await http.post(Hostting.updateUserNew,
+        body: userModel.toJson(), headers: Hostting().getHeader());
+    if (response.statusCode == 200) {
       return true;
     }
     return false;

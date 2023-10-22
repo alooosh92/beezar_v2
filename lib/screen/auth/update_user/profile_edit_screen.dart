@@ -1,12 +1,16 @@
 import 'package:beezer_v2/model/user_model.dart';
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
+import 'package:beezer_v2/res/validator_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
-import 'package:beezer_v2/screen/home/widget/drop_down_profile_edit.dart';
-import 'package:beezer_v2/screen/home/widget/textfield_profile_edit.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
+import 'package:beezer_v2/widget/input_decration_def.dart';
+import 'package:beezer_v2/widget/list_region.dart';
+import 'package:beezer_v2/widget/progress_def.dart';
 import 'package:beezer_v2/widget/progress_home_row.dart';
+import 'package:beezer_v2/widget/text_form_field_def.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileEditScreen extends StatelessWidget {
   const ProfileEditScreen({super.key});
@@ -15,7 +19,6 @@ class ProfileEditScreen extends StatelessWidget {
     AuthController authController = AuthController();
     TextEditingController myName = TextEditingController();
     TextEditingController phone = TextEditingController();
-    TextEditingController password = TextEditingController();
     UserModel user = UserModel();
     return Scaffold(
       body: SizedBox(
@@ -28,11 +31,12 @@ class ProfileEditScreen extends StatelessWidget {
                 future: authController.getUser(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const ProgressHomeRow();
+                    return SizedBox(
+                        height: MediaQuery.sizeOf(context).height,
+                        child: const ProgressHomeRow());
                   }
                   myName.text = snapshot.data!.name!;
                   phone.text = snapshot.data!.phone!;
-                  password.text = user.password ?? "";
                   user = snapshot.data!;
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,80 +48,54 @@ class ProfileEditScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Row(
-                        children: [
-                          Text(
-                            'الاسم',
-                            style: FontDef.w600S17Cb,
-                          )
-                        ],
-                      ),
-                      TextFormFieldProfileEdit(
+                      TextFormFieldDeF(
                         keyboard: TextInputType.text,
                         label: 'الاسم',
                         controller: myName,
-                        paddingTop: 5,
+                        paddingTop: 20,
                         press: (p0) => user.name = p0,
                       ),
-                      const Row(
-                        children: [
-                          Text(
-                            'كلمة المرور',
-                            style: FontDef.w600S17Cb,
-                          )
-                        ],
-                      ),
-                      const Row(
-                        children: [
-                          Text(
-                            'رقم الجوال',
-                            style: FontDef.w600S17Cb,
-                          )
-                        ],
-                      ),
-                      TextFormFieldProfileEdit(
+                      TextFormFieldDeF(
                         keyboard: TextInputType.phone,
                         label: 'رقم الجوال',
                         controller: phone,
-                        paddingTop: 5,
-                        press: (p0) => user.phone,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Row(
-                        children: [
-                          Text(
-                            'المدينة',
-                            style: FontDef.w600S17Cb,
-                          )
-                        ],
+                        paddingTop: 20,
+                        press: (p0) => user.phone = p0,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          DropdownButtonHideUnderline(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 5,
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              decoration: (BoxDecoration(
-                                  border:
-                                      Border.all(color: ColorManager.grayText),
-                                  borderRadius: BorderRadius.circular(10))),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: DropDownProfileEdit(
-                                  val: user.address,
-                                  press: (p0) => user.address = p0,
-                                ),
-                              ),
-                            ),
-                          )
+                          DropdownButtonFormField(
+                            padding: const EdgeInsets.only(top: 30),
+                            decoration: inputDecorationDef(null, "المحافظة"),
+                            isDense: true,
+                            borderRadius: BorderRadius.circular(30),
+                            value: user.address,
+                            items: listRegion,
+                            validator: (value) =>
+                                ValidatorDef.validatorRegion(value),
+                            style: FontDef.w400S14Cg,
+                            onChanged: (value) => user.address = value,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 40),
                       ElevatedButtonDef(
-                        press: () {},
+                        press: () async {
+                          progressDef();
+                          var b = await authController.updateUser(user);
+                          if (b) {
+                            Get.back();
+                            Get.snackbar("ملاحظة", "تم تعديل البيانات بنجاح",
+                                backgroundColor: ColorManager.primaryColor,
+                                colorText: ColorManager.white);
+                          } else {
+                            Get.back();
+                            Get.snackbar("تحزير", "هناك خطا ما",
+                                backgroundColor: ColorManager.primaryColor,
+                                colorText: ColorManager.white);
+                          }
+                        },
                         text: 'حفط التغييرات',
                       )
                     ],

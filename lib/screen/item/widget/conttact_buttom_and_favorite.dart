@@ -58,6 +58,8 @@ class _ConttactButtomAndFavoriteState extends State<ConttactButtomAndFavorite> {
               }
             },
             style: const ButtonStyle(
+              alignment: Alignment.center,
+              padding: MaterialStatePropertyAll(EdgeInsets.all(0)),
               backgroundColor:
                   MaterialStatePropertyAll(ColorManager.liteGrayText),
               fixedSize: MaterialStatePropertyAll(Size(50, 50)),

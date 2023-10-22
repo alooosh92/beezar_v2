@@ -26,4 +26,9 @@ class UserModel {
       emailVerifiedAt: json["email_verified_at"],
     );
   }
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "phone": phone,
+        "address": address,
+      };
 }

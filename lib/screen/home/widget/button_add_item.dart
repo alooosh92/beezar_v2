@@ -11,13 +11,15 @@ class ButtonAddItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
       onPressed: () => Get.to(const AddItemScreen()),
       child: Container(
         height: 70,
         width: 70,
         decoration: BoxDecoration(
             color: ColorManager.primaryColor,
-            borderRadius: BorderRadius.circular(30)),
+            borderRadius: BorderRadius.circular(50)),
         child: const Icon(
           Icons.add,
           color: ColorManager.white,

@@ -13,31 +13,42 @@ class SingleTerm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "مرحبًا بك في تطبيق بيزار . تم تطوير هذه السياسة لضمان تجربة استخدام آمنة وموثوقة لجميع مستخدمي التطبيق، يُرجى قراءة هذه السياسة بعناية قبل استخدام التطبيق.",
-          style: FontDef.w400S14Cg,
-        ),
-        Row(
-          children: [
-            const Text(
-              '* ',
-              style: FontDef.w700182Cb,
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "مرحبًا بك في تطبيق بيزار . تم تطوير هذه السياسة لضمان تجربة استخدام آمنة وموثوقة لجميع مستخدمي التطبيق، يُرجى قراءة هذه السياسة بعناية قبل استخدام التطبيق.",
+            style: FontDef.w400S14Cg,
+          ),
+          Row(
+            children: [
+              const Text(
+                '* ',
+                style: FontDef.w700182Cb,
+              ),
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width - 100,
+                child: Text(
+                  termTitle,
+                  overflow: TextOverflow.ellipsis,
+                  style: FontDef.w700182Cb,
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: Text(
+              termDet,
+              overflow: TextOverflow.ellipsis,
+              style: FontDef.w400S14Cg,
             ),
-            Text(
-              termTitle,
-              style: FontDef.w700182Cb,
-            )
-          ],
-        ),
-        Text(
-          termDet,
-          style: FontDef.w400S14Cg,
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }

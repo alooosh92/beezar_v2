@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           }
-          Timer(const Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 1), () {
             if (_authController.checkUser!) {
               Get.offAll(const PrimerScreen());
             } else {
