@@ -9,15 +9,8 @@ import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
   bool remmberMy = true;
-  bool? checkUser;
   RegisterUserModel registerUserModel = RegisterUserModel();
   UserModel userModel = UserModel();
-
-  @override
-  void onInit() {
-    checkToken();
-    super.onInit();
-  }
 
   void changeRemmberMy() {
     remmberMy = !remmberMy;
@@ -80,11 +73,9 @@ class AuthController extends GetxController {
       http.Response response = await http.post(Hostting.checkTokenValidity,
           headers: Hostting().getHeader());
       if (response.statusCode == 200) {
-        checkUser = true;
         return true;
       }
     }
-    checkUser = false;
     return false;
   }
 

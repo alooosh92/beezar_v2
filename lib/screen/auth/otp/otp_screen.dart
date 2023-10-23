@@ -1,6 +1,6 @@
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
-import 'package:beezer_v2/screen/home/primer_screen.dart';
+import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:beezer_v2/widget/app_bar_auth.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
 import 'package:beezer_v2/widget/progress_def.dart';
@@ -53,7 +53,7 @@ class OtpScreen extends StatelessWidget {
                     progressDef();
                     var res = await authController.sendOTP(otpval);
                     if (res) {
-                      Get.offAll(const PrimerScreen());
+                      Get.offAll(const HomeScreen());
                     } else {
                       Get.snackbar("خطأ", "تم ادخال رمز خاطئ");
                     }

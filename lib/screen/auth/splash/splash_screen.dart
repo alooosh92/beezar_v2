@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
 import 'package:beezer_v2/screen/auth/login/login_screen.dart';
-import 'package:beezer_v2/screen/home/primer_screen.dart';
+import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +13,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+// ignore: unused_element
 double _size = 0;
 AuthController _authController = Get.find();
 
@@ -41,9 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           }
-          Timer(const Duration(seconds: 1), () {
-            if (_authController.checkUser!) {
-              Get.offAll(const PrimerScreen());
+          Timer(const Duration(seconds: 1), () async {
+            if (await _authController.checkToken()) {
+              Get.offAll(const HomeScreen());
             } else {
               Get.offAll(const LoginScreen());
             }

@@ -1,12 +1,11 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
-import 'package:beezer_v2/screen/home/home_controller.dart';
+import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
 AppBar appBarprofile(BuildContext context) {
-  HomeController homeController = Get.find();
   return AppBar(
     toolbarHeight: 100,
     backgroundColor: Colors.transparent,
@@ -20,7 +19,7 @@ AppBar appBarprofile(BuildContext context) {
     leading: Padding(
       padding: const EdgeInsets.all(10.0),
       child: IconButton(
-        onPressed: () => homeController.cheangePage(0),
+        onPressed: () => Get.to(const HomeScreen()),
         icon: const Icon(Icons.arrow_back_ios_outlined,
             color: ColorManager.grayText),
       ),

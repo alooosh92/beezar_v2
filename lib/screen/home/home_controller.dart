@@ -5,7 +5,6 @@ import 'package:beezer_v2/model/massege.dart';
 import 'package:beezer_v2/model/sub_gategory_model.dart';
 import 'package:beezer_v2/res/hostting.dart';
 import 'package:beezer_v2/screen/item/item_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +17,6 @@ class HomeController extends GetxController {
       RxMap<String, List<SubCategoryModel>>();
   RxList<ItemModel> itemModelAll = RxList<ItemModel>();
   RxList<ItemModel> itemModelShearch = RxList<ItemModel>();
-  PageController pageController = PageController();
   RxList<String> listDropDownSearch = RxList<String>();
   RxInt pageNumber = 0.obs;
   RxList<Massege> listMassege = RxList<Massege>();
@@ -32,11 +30,6 @@ class HomeController extends GetxController {
 
   void changeRegion(String val) {
     region.value = val;
-  }
-
-  void cheangePage(int number) {
-    pageNumber.value = number;
-    pageController.jumpToPage(number);
   }
 
   void cheangeCategory(int? num) {
