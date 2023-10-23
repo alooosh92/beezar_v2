@@ -1,4 +1,5 @@
 import 'package:beezer_v2/res/color_manager.dart';
+import 'package:beezer_v2/res/font_def.dart';
 import 'package:flutter/material.dart';
 
 class ButtonSend extends StatelessWidget {
@@ -15,7 +16,10 @@ class ButtonSend extends StatelessWidget {
             fixedSize: MaterialStatePropertyAll(Size(250, 40)),
             backgroundColor:
                 MaterialStatePropertyAll(ColorManager.primaryColor)),
-        child: Text(hint),
+        child: Text(
+          hint,
+          style: FontDef.w700S16Cw,
+        ),
       ),
     );
   }

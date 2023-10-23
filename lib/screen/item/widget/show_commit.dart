@@ -14,16 +14,12 @@ Future<dynamic> showCommit(BuildContext context, int id) {
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(10),
-            height: MediaQuery.sizeOf(context).height * 0.6,
+            height: MediaQuery.sizeOf(context).height / 2,
             width: MediaQuery.sizeOf(context).width,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("التعليقات"),
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.4,
-                  child: ListCommets(id: id),
-                ),
+                Expanded(child: ListCommets(id: id)),
                 TextFieldCommit(
                   id: id,
                 ),

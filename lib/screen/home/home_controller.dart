@@ -25,6 +25,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
+    await getMassege();
     await getCategoryAndSub();
     super.onInit();
   }
