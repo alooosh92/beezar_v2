@@ -44,4 +44,6 @@ class Hostting {
   static Uri deleteComment(int id) => Uri.parse("$api/delete-comments/$id");
   static Uri writeComment = Uri.parse("$api/store-comments");
   static Uri getMassege = Uri.parse("$api/show-comments-user");
+  static Uri deleteItem(int id) => Uri.parse("$api/delete_item/$id");
+  static Uri updateItem(int id) => Uri.parse("$api/update_item/$id");
 }

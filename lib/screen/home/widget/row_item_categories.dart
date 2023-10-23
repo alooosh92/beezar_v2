@@ -67,16 +67,16 @@ class _RowItemCategoriesState extends State<RowItemCategories> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CachedNetworkImage(
-                          imageUrl:
-                              '${Hostting.imageCategory}/${homeController.listGategoryModel[index].image}',
-                          placeholder: (context, url) =>
-                              const ProgressHomeRow(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          height: 50,
-                          width: 50,
-                        ),
+                        // CachedNetworkImage(
+                        //   imageUrl:
+                        //       '${Hostting.imageCategory}/${homeController.listGategoryModel[index].image}',
+                        //   placeholder: (context, url) =>
+                        //       const ProgressHomeRow(),
+                        //   errorWidget: (context, url, error) =>
+                        //       const Icon(Icons.error),
+                        //   height: 50,
+                        //   width: 50,
+                        // ),
                         Text(
                           homeController.listGategoryModel[index].name,
                           style: FontDef.w600S9Cb,
