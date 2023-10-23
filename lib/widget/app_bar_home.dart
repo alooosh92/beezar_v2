@@ -4,6 +4,7 @@ import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/home/home_controller.dart';
 import 'package:beezer_v2/screen/item/item_screen.dart';
+import 'package:beezer_v2/screen/massege/massege.dart';
 import 'package:beezer_v2/widget/drop_down_buttom_def.dart';
 import 'package:beezer_v2/widget/input_decration_def.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -67,18 +68,26 @@ AppBar appBarHome(BuildContext context) {
       ],
     ),
     actions: [
-      IconButton(
-        onPressed: () {},
-        icon: const Stack(
-          children: [
-            Icon(Icons.notifications_none_outlined,
-                color: ColorManager.grayText),
-            Icon(
-              Icons.brightness_1,
-              color: ColorManager.red,
-              size: 8,
-            )
-          ],
+      GetX<HomeController>(
+        init: homeController,
+        builder: (controller) => IconButton(
+          onPressed: () {
+            Get.to(const MassegeScreen());
+          },
+          icon: Stack(
+            children: [
+              const Icon(Icons.notifications_none_outlined,
+                  color: ColorManager.grayText),
+              Visibility(
+                visible: homeController.listMassege.value.isNotEmpty,
+                child: const Icon(
+                  Icons.brightness_1,
+                  color: ColorManager.red,
+                  size: 8,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     ],

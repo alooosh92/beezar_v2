@@ -42,7 +42,7 @@ class ItemInfoAndButtomScroll extends StatelessWidget {
             DotsIndicator(
               reversed: false,
               dotsCount: number,
-              position: itemController.pagenum,
+              position: itemController.pagenum.value,
               decorator: DotsDecorator(
                 activeColor: ColorManager.primaryColor,
                 activeSize: const Size(18, 9),

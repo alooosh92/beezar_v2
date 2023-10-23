@@ -40,4 +40,8 @@ class Hostting {
   static Uri createItem = Uri.parse("$api/create_item");
   static Uri getPolicy = Uri.parse("$api/showPolicy");
   static Uri updateUserNew = Uri.parse("$api/updateInfoUser");
+  static Uri getComment(int id) => Uri.parse("$api/show-comments/$id");
+  static Uri deleteComment(int id) => Uri.parse("$api/delete-comments/$id");
+  static Uri writeComment = Uri.parse("$api/store-comments");
+  static Uri getMassege = Uri.parse("$api/show-comments-user");
 }

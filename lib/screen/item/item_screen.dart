@@ -4,6 +4,7 @@ import 'package:beezer_v2/screen/item/widget/conttact_buttom_and_favorite.dart';
 import 'package:beezer_v2/screen/item/widget/info_user_contact.dart';
 import 'package:beezer_v2/screen/item/widget/item_info_and_buttom_scroll.dart';
 import 'package:beezer_v2/screen/item/widget/page_builder_image.dart';
+import 'package:beezer_v2/screen/item/widget/row_comment.dart';
 import 'package:flutter/material.dart';
 
 class ItemScreen extends StatelessWidget {
@@ -29,7 +30,11 @@ class ItemScreen extends StatelessWidget {
           ),
           ConttactButtomAndFavorite(
             item: item,
-          )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [RowComment(item: item)],
+          ),
         ],
       ),
     );

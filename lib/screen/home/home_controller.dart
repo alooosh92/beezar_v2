@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:beezer_v2/model/gategory_model.dart';
 import 'package:beezer_v2/model/item_model.dart';
+import 'package:beezer_v2/model/massege.dart';
 import 'package:beezer_v2/model/sub_gategory_model.dart';
 import 'package:beezer_v2/res/hostting.dart';
 import 'package:beezer_v2/screen/item/item_screen.dart';
@@ -20,6 +21,7 @@ class HomeController extends GetxController {
   PageController pageController = PageController();
   RxList<String> listDropDownSearch = RxList<String>();
   RxInt pageNumber = 0.obs;
+  RxList<Massege> listMassege = RxList<Massege>();
 
   @override
   void onInit() async {
@@ -197,5 +199,19 @@ class HomeController extends GetxController {
       listDropDownSearch.add("${element.id} - الاسم:${element.name}");
     }
     refresh();
+  }
+
+  Future<void> getMassege() async {
+    http.Response response =
+        await http.get(Hostting.getMassege, headers: Hostting().getHeader());
+
+    if (response.statusCode == 200) {
+      listMassege.clear();
+      var body = jsonDecode(response.body);
+      for (var element in body["data"]) {
+        listMassege.add(Massege.fromJson(element));
+      }
+      refresh();
+    }
   }
 }

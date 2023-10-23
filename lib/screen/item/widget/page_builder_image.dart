@@ -20,8 +20,7 @@ class PageBuilderImage extends StatelessWidget {
       height: MediaQuery.sizeOf(context).height / 2.5,
       child: PageView.builder(
         onPageChanged: (value) {
-          itemController.pagenum = value;
-          itemController.update();
+          itemController.changeimage(value);
         },
         controller: itemController.pageController,
         scrollDirection: Axis.horizontal,
