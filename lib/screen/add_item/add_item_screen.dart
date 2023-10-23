@@ -62,6 +62,7 @@ class AddItemScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   DropdownButtonFormField<int?>(
                     value: addItemController.choCat.value != -1
+                        // ignore: prefer_null_aware_operators
                         ? addItemController
                                     .sub[addItemController.choCat.value] !=
                                 null

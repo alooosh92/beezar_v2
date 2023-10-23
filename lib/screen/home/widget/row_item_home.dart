@@ -42,12 +42,14 @@ class RowItemHome extends StatelessWidget {
           return SizedBox(
             height: sizeH,
             child: ListView.builder(
-              itemCount:
-                  snapshot.data!.length > 25 ? 25 : snapshot.data!.length,
+              itemCount: homeController.itemModelAll.length > 25
+                  ? 25
+                  : homeController.itemModelAll.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () => homeController.toItem(snapshot.data![index]),
+                  onTap: () =>
+                      homeController.toItem(homeController.itemModelAll[index]),
                   child: Container(
                     margin: const EdgeInsets.only(
                         left: 10, top: 5, bottom: 5, right: 5),
@@ -71,7 +73,7 @@ class RowItemHome extends StatelessWidget {
                       children: [
                         CachedNetworkImage(
                           imageUrl:
-                              "${Hostting.imageItem}/${snapshot.data![index].images![0]}",
+                              "${Hostting.imageItem}/${homeController.itemModelAll[index].images![0]}",
                           placeholder: (context, url) =>
                               const ProgressHomeRow(),
                           errorWidget: (context, url, error) =>
@@ -81,14 +83,15 @@ class RowItemHome extends StatelessWidget {
                           fit: BoxFit.fill,
                         ),
                         Text(
-                          snapshot.data![index].name,
+                          homeController.itemModelAll[index].name,
                           style: FontDef.w500S11Cb,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              snapshot.data![index].price.toString(),
+                              homeController.itemModelAll[index].price
+                                  .toString(),
                               style: FontDef.w500S13Cb,
                             ),
                           ],

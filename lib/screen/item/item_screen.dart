@@ -30,6 +30,7 @@ class ItemScreen extends StatelessWidget {
                   name: item.name,
                 ),
                 InfoUserContact(
+                  date: item.date,
                   address: item.address,
                   phone: item.phone,
                   price: item.price.toString(),

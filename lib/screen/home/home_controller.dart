@@ -166,6 +166,9 @@ class HomeController extends GetxController {
           await http.get(Hostting.getItems, headers: Hostting().getHeader());
       if (response.statusCode == 200) {
         List<ItemModel> list = [];
+        itemModelAll.clear();
+        itemModelShearch.clear();
+        listDropDownSearch.clear();
         var body = jsonDecode(response.body);
         for (var element in body["items"]) {
           var it = ItemModel.fromJson(element);
