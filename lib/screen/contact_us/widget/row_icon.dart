@@ -23,7 +23,7 @@ class RowIcon extends StatelessWidget {
         ),
         IconButtonDef(
           icon: FontAwesomeIcons.phone,
-          url: 'tel:00905347784520',
+          url: 'tel:00905318809686',
         ),
         IconButtonDef(
           icon: FontAwesomeIcons.earthAfrica,
