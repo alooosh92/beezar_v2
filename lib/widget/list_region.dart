@@ -15,7 +15,6 @@ var listRegion = [
   dropDownMenuItemDef("الدانا", "الدانا"),
   dropDownMenuItemDef("سرمدا", "سرمدا"),
   dropDownMenuItemDef("مارع", "مارع"),
-  dropDownMenuItemDef("ادلب", "ادلب"),
   dropDownMenuItemDef("جنديرس", "جنديرس"),
   dropDownMenuItemDef("حارم", "حارم"),
   dropDownMenuItemDef("القامشلي", "القامشلي"),

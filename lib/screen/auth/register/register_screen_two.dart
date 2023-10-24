@@ -1,13 +1,13 @@
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
 import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/auth/login/widget/row_divider_text_divider.dart';
-import 'package:beezer_v2/screen/auth/otp/otp_screen.dart';
 import 'package:beezer_v2/screen/auth/register/widget/appbar_register.dart';
-import 'package:beezer_v2/widget/row_number_screen_register.dart';
+import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
 import 'package:beezer_v2/widget/google_facebook_icon.dart';
 import 'package:beezer_v2/widget/have_account.dart';
 import 'package:beezer_v2/widget/progress_def.dart';
+import 'package:beezer_v2/widget/row_number_screen_register.dart';
 import 'package:beezer_v2/widget/text_form_field_password_def.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,7 +60,7 @@ class RegisterScreenTwo extends StatelessWidget {
                             password.text;
                         var res = await authController.register();
                         if (res) {
-                          Get.to(const OtpScreen());
+                          Get.offAll(const HomeScreen());
                         } else {
                           Get.snackbar("خطأ",
                               "تم استخدام البريد الالكتروني مسبقاً او حدث خطأ ما الرجاء الاتصال بالمسوؤل");

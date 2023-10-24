@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:beezer_v2/model/login_user_model.dart';
 import 'package:beezer_v2/model/register_user_model.dart';
 import 'package:beezer_v2/model/user_model.dart';
@@ -135,7 +136,8 @@ class AuthController extends GetxController {
           storeg.write("token", res["token"]);
           return Get.offAll(const HomeScreen());
         } else {
-          registerUserModel.email == user.email;
+          registerUserModel.email = user.email;
+          registerUserModel.name = user.displayName;
           return Get.to(const RegisterScreenOne());
         }
       }
