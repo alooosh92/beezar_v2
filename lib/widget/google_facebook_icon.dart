@@ -107,7 +107,7 @@ Future<void> _facebookLogin() async {
         Get.snackbar(
           "مرحباً بك ",
           "أهلا بك${profile.name} بتطبيق بيزار ",
-          duration: const Duration(seconds: 3),
+          duration: const Duration(seconds: 3), 
           snackPosition: SnackPosition.TOP,
         );
 
