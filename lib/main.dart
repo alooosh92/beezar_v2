@@ -1,10 +1,11 @@
-//2023-10-24 alaa
+//2023-10-24 shaimaa
 import 'dart:io';
+
 import 'package:beezer_v2/res/binding_def.dart';
 import 'package:beezer_v2/screen/auth/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class MyHttpOverrides extends HttpOverrides {
