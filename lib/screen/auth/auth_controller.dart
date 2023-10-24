@@ -5,6 +5,7 @@ import 'package:beezer_v2/model/user_model.dart';
 import 'package:beezer_v2/res/hostting.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
@@ -109,4 +110,39 @@ class AuthController extends GetxController {
     }
     return false;
   }
+
+  Future<bool> signinGoogle() async {
+    try {
+      final user = await GoogleSignInApi.login();
+      if (user == null) {
+        Get.snackbar("title", "Nooooooooooooooooooo user ");
+      } else {
+        Get.snackbar(
+          "مرحباً بك ",
+          "أهلا بك${user.email} بتطبيق بيزار ",
+          duration: const Duration(seconds: 3),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        http.Response response = await http.post(Hostting.loginGoogle,
+            headers: Hostting().getHeader(), body: {"email": user.email});
+        if (response.statusCode == 200) {
+          final storeg = GetStorage();
+          var res = jsonDecode(response.body);
+          userModel = UserModel.fromJson(res["user"]);
+          storeg.write("token", res["token"]);
+          return true;
+        } else {
+          return false;
+        }
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+class GoogleSignInApi {
+  static final _googleSignIn = GoogleSignIn();
+  static Future<GoogleSignInAccount?> login() => _googleSignIn.signIn();
 }
