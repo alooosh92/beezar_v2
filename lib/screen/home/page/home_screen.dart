@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
         child: RefreshIndicator(
           onRefresh: () async {
-            homeController.getAllItems(true);
+            homeController.updateHome();
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

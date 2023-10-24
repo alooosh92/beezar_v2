@@ -134,6 +134,8 @@ class AuthController extends GetxController {
           var res = jsonDecode(response.body);
           userModel = UserModel.fromJson(res["user"]);
           storeg.write("token", res["token"]);
+          storeg.write("MyEmail", user.email);
+          storeg.remove("MyPassword");
           return Get.offAll(const HomeScreen());
         } else {
           registerUserModel.email = user.email;

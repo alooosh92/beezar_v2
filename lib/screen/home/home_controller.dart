@@ -23,7 +23,6 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    await getMassege();
     await getCategoryAndSub();
     super.onInit();
   }
@@ -151,6 +150,12 @@ class HomeController extends GetxController {
       }
     }
     return itemModelAll.where((element) => element.favorite).toList();
+  }
+
+  Future<void> updateHome() async {
+    await getCategoryAndSub();
+    await getMassege();
+    await getAllItems(true);
   }
 
   Future<List<ItemModel>> getAllItems(bool updateData) async {
