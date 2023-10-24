@@ -3,6 +3,9 @@ import 'package:beezer_v2/model/login_user_model.dart';
 import 'package:beezer_v2/model/register_user_model.dart';
 import 'package:beezer_v2/model/user_model.dart';
 import 'package:beezer_v2/res/hostting.dart';
+import 'package:beezer_v2/screen/auth/login/login_screen.dart';
+import 'package:beezer_v2/screen/auth/register/register_screen_one.dart';
+import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -111,11 +114,11 @@ class AuthController extends GetxController {
     return false;
   }
 
-  Future<bool> signinGoogle() async {
+  Future signinGoogle() async {
     try {
       final user = await GoogleSignInApi.login();
       if (user == null) {
-        Get.snackbar("title", "Nooooooooooooooooooo user ");
+        return null;
       } else {
         Get.snackbar(
           "مرحباً بك ",
@@ -130,14 +133,14 @@ class AuthController extends GetxController {
           var res = jsonDecode(response.body);
           userModel = UserModel.fromJson(res["user"]);
           storeg.write("token", res["token"]);
-          return true;
+          return Get.offAll(const HomeScreen());
         } else {
-          return false;
+          registerUserModel.email == user.email;
+          return Get.to(const RegisterScreenOne());
         }
       }
-      return false;
     } catch (e) {
-      return false;
+      Get.offAll(const LoginScreen());
     }
   }
 }

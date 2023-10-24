@@ -6,7 +6,6 @@ import 'package:beezer_v2/screen/auth/login/widget/row_divider_text_divider.dart
 import 'package:beezer_v2/screen/auth/login/widget/row_remmber_me_and_forget_password.dart';
 import 'package:beezer_v2/screen/auth/login/widget/svg_bottom_bar.dart';
 import 'package:beezer_v2/screen/home/page/home_screen.dart';
-//import 'package:beezer_v2/screen/home/primer_screen.dart';
 import 'package:beezer_v2/screen/user_policy/usage_policy.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
 import 'package:beezer_v2/widget/google_facebook_icon.dart';

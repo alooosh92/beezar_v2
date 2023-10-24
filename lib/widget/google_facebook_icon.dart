@@ -45,7 +45,7 @@ class GoogleFacebookIcon extends StatelessWidget {
                 AuthController authController = Get.find();
                 var b = await authController.signinGoogle();
                 {
-                  if (b) {
+                  if (b != null && b) {
                     Get.offAll(const HomeScreen());
                   } else {
                     Get.offAll(const LoginScreen());
