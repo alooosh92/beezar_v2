@@ -67,29 +67,41 @@ class RowItemHome extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CachedNetworkImage(
-                          imageUrl:
-                              "${Hostting.imageItem}/${snapshot.data![index].images![0]}",
-                          placeholder: (context, url) =>
-                              const ProgressHomeRow(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          height: sizeH - 70,
-                          width: sizeW - 30,
-                          fit: BoxFit.fill,
+                        Banner(
+                          location: BannerLocation.topEnd,
+                          // color: ColorManager.primaryColor,
+                          message:
+                              "السعر: ${snapshot.data![index].price.toInt().toString()}",
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "${Hostting.imageItem}/${snapshot.data![index].images![0]}",
+                            placeholder: (context, url) =>
+                                const ProgressHomeRow(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            height: sizeH - 70,
+                            width: sizeW - 30,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         Text(
                           snapshot.data![index].name,
                           style: FontDef.w500S11Cb,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              snapshot.data![index].price.toString(),
-                              style: FontDef.w500S13Cb,
-                            ),
-                          ],
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.location_on_outlined,
+                                size: 20,
+                              ),
+                              Text(
+                                snapshot.data![index].address,
+                                style: FontDef.w500S13Cb,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
