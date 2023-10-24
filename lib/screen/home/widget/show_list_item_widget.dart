@@ -1,70 +1,3 @@
-// import 'package:beezer_v2/model/item_model.dart';
-// import 'package:beezer_v2/res/color_manager.dart';
-// import 'package:beezer_v2/res/font_def.dart';
-// import 'package:beezer_v2/screen/home/home_controller.dart';
-// import 'package:beezer_v2/screen/home/widget/item_in_favorite.dart';
-// import 'package:beezer_v2/screen/item/item_screen.dart';
-// import 'package:beezer_v2/screen/update_Item/update_item.dart';
-// import 'package:beezer_v2/widget/cottact_with_user.dart';
-// import 'package:beezer_v2/widget/progress_def.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-
-// class ShowListItemWidget extends StatelessWidget {
-//   const ShowListItemWidget(
-//       {super.key, required this.list, required this.isFavorite});
-
-//   final List<ItemModel> list;
-//   final bool isFavorite;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     HomeController homeController = Get.find();
-//     if (list.isEmpty) {
-//       return const Center(
-//         child: Text(
-//           "لا يوجد عناصر لعرضها",
-//           style: FontDef.w400S16Cb,
-//         ),
-//       );
-//     }
-//     return ListView.builder(
-//       itemCount: list.length,
-//       scrollDirection: Axis.vertical,
-//       itemBuilder: (context, index) {
-//         return ItemInFavorite(
-//           isfav: isFavorite,
-//           item: list[index],
-//           pressItem: () => Get.to(ItemScreen(item: list[index])),
-//           pressContact: () => isFavorite
-//               ? conttactWithUser(list[index].phone)
-//               : Get.to(const UpdateItemScreen()),
-//           pressDelete: () async {
-//             //
-//             //حذف منشور
-//             //
-//             progressDef();
-//             var b = await homeController.addDeleteFavourite(list[index]);
-//             if (b) {
-//               Get.back();
-//               Get.snackbar(
-//                   backgroundColor: ColorManager.primaryColor,
-//                   colorText: ColorManager.white,
-//                   "ملاحظة",
-//                   list[index].favorite
-//                       ? "تم اضافة الاعلان الى المفضلة"
-//                       : "تم حذف الاعلان من المفضلة");
-//             } else {
-//               Get.back();
-//               Get.snackbar("خطأ", "حدث خطأ ما الرجاء التواصل مع المسؤول");
-//             }
-//           },
-//         );
-//       },
-//     );
-//   }
-// }
-
 import 'package:beezer_v2/model/add_item.dart';
 import 'package:beezer_v2/model/item_model.dart';
 import 'package:beezer_v2/res/color_manager.dart';
@@ -80,10 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ShowListItemWidget extends StatefulWidget {
-  const ShowListItemWidget(
-      {super.key, required this.list, required this.isFavorite});
+  const ShowListItemWidget({
+    super.key,
+    this.list,
+    required this.isFavorite,
+  });
 
-  final List<ItemModel> list;
+  final List<ItemModel>? list;
   final bool isFavorite;
 
   @override
@@ -94,7 +30,11 @@ class _ShowListItemWidgetState extends State<ShowListItemWidget> {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.find();
-    if (widget.list.isEmpty) {
+    var lists = widget.list ??
+        homeController.itemModelAll
+            .where((element) => element.favorite)
+            .toList();
+    if (lists.isEmpty) {
       return const Center(
         child: Text(
           "لا يوجد عناصر لعرضها",
@@ -103,40 +43,40 @@ class _ShowListItemWidgetState extends State<ShowListItemWidget> {
       );
     }
     return ListView.builder(
-      itemCount: widget.list.length,
+      itemCount: lists.length,
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         return ItemInFavorite(
           isfav: widget.isFavorite,
-          item: widget.list[index],
-          pressItem: () => Get.to(ItemScreen(item: widget.list[index])),
+          item: lists[index],
+          pressItem: () => Get.to(ItemScreen(item: lists[index])),
           pressContact: () => widget.isFavorite
-              ? conttactWithUser(widget.list[index].phone)
+              ? conttactWithUser(lists[index].phone)
               : Get.to(AddItemScreen(
                   item: AddItem(
-                      address: widget.list[index].address,
-                      catId: widget.list[index].categoryId,
-                      des: widget.list[index].description,
-                      id: widget.list[index].id,
-                      name: widget.list[index].name,
-                      price: widget.list[index].price,
-                      iamgeUri: widget.list[index].images,
-                      subCatID: widget.list[index].subCategoryId),
+                      address: lists[index].address,
+                      catId: lists[index].categoryId,
+                      des: lists[index].description,
+                      id: lists[index].id,
+                      name: lists[index].name,
+                      price: lists[index].price,
+                      iamgeUri: lists[index].images,
+                      subCatID: lists[index].subCategoryId),
                 )),
           pressDelete: () async {
             if (widget.isFavorite) {
               progressDef();
-              var b =
-                  await homeController.addDeleteFavourite(widget.list[index]);
+              var b = await homeController.addDeleteFavourite(lists[index]);
               if (b) {
                 Get.back();
                 Get.snackbar(
                     backgroundColor: ColorManager.primaryColor,
                     colorText: ColorManager.white,
                     "ملاحظة",
-                    widget.list[index].favorite
+                    lists[index].favorite
                         ? "تم اضافة الاعلان الى المفضلة"
                         : "تم حذف الاعلان من المفضلة");
+                setState(() {});
               } else {
                 Get.back();
                 Get.snackbar("خطأ", "حدث خطأ ما الرجاء التواصل مع المسؤول");
@@ -148,8 +88,8 @@ class _ShowListItemWidgetState extends State<ShowListItemWidget> {
                   TextButton(
                       onPressed: () async {
                         progressDef();
-                        var b = await addItemController
-                            .deleteItem(widget.list[index].id);
+                        var b =
+                            await addItemController.deleteItem(lists[index].id);
                         if (b) {
                           Get.back();
                           Get.back();
@@ -157,7 +97,7 @@ class _ShowListItemWidgetState extends State<ShowListItemWidget> {
                               backgroundColor: ColorManager.primaryColor,
                               colorText: ColorManager.white);
                           setState(() {
-                            widget.list.remove(widget.list[index]);
+                            lists.remove(lists[index]);
                           });
                         } else {
                           Get.back();

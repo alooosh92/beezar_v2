@@ -54,6 +54,7 @@ class AddImageToItem extends StatelessWidget {
                                 colorText: ColorManager.white);
                             HomeController homeController = Get.find();
                             homeController.getAllItems(true);
+                            homeController.pageNumber.value = 1;
                             Get.off(const HomeScreen());
                           } else {
                             Get.snackbar(
@@ -69,6 +70,7 @@ class AddImageToItem extends StatelessWidget {
                                 colorText: ColorManager.white);
                             HomeController homeController = Get.find();
                             homeController.getAllItems(true);
+                            homeController.pageNumber.value = 1;
                             Get.off(const HomeScreen());
                           } else {
                             Get.snackbar(

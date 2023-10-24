@@ -17,8 +17,6 @@ class _RowItemCategoriesState extends State<RowItemCategories> {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.find();
-    Color color;
-    List<BoxShadow> shadow;
     return GetX<HomeController>(
         init: homeController,
         builder: (controller) {
@@ -28,22 +26,6 @@ class _RowItemCategoriesState extends State<RowItemCategories> {
               itemCount: controller.listGategoryModel.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                if (controller.categore.value != -1 &&
-                    controller.listGategoryModel[index].id !=
-                        controller.categore.value) {
-                  color = Colors.transparent;
-                  shadow = const [];
-                } else {
-                  color = ColorManager.white;
-                  shadow = const [
-                    BoxShadow(
-                      color: ColorManager.litePrimaryColor,
-                      offset: Offset(1, 2),
-                      blurStyle: BlurStyle.normal,
-                      blurRadius: 1,
-                    )
-                  ];
-                }
                 return InkWell(
                   onTap: () {
                     controller.cheangeCategory(
@@ -57,9 +39,24 @@ class _RowItemCategoriesState extends State<RowItemCategories> {
                     height: 100,
                     width: 85,
                     decoration: BoxDecoration(
-                      color: color,
+                      color: homeController.categore.value != -1 &&
+                              homeController.listGategoryModel[index].id !=
+                                  homeController.categore.value
+                          ? Colors.transparent
+                          : ColorManager.white,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: shadow,
+                      boxShadow: homeController.categore.value != -1 &&
+                              homeController.listGategoryModel[index].id !=
+                                  homeController.categore.value
+                          ? const []
+                          : const [
+                              BoxShadow(
+                                color: ColorManager.litePrimaryColor,
+                                offset: Offset(1, 2),
+                                blurStyle: BlurStyle.normal,
+                                blurRadius: 1,
+                              )
+                            ],
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

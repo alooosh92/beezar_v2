@@ -35,6 +35,7 @@ class BottomNavigationBarDef extends StatelessWidget {
                         check: controller.pageNumber.value,
                         press: () {
                           homeController.pageNumber.value = 0;
+                          homeController.getAllItems(true);
                           Get.to(const HomeScreen());
                         }),
                     IconButtomBarDef(

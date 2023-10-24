@@ -30,7 +30,7 @@ class RowItemHome extends StatelessWidget {
               child: const ProgressHomeRow(),
             );
           }
-          if (snapshot.data!.isEmpty) {
+          if (snapshot.data == null || snapshot.data!.isEmpty) {
             return SizedBox(
               height: sizeH,
               width: sizeW,
@@ -42,20 +42,16 @@ class RowItemHome extends StatelessWidget {
           return SizedBox(
             height: sizeH,
             child: ListView.builder(
-              itemCount: homeController.itemModelAll.length > 25
-                  ? 25
-                  : homeController.itemModelAll.length,
+              itemCount:
+                  snapshot.data!.length > 25 ? 25 : snapshot.data!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () =>
-                      homeController.toItem(homeController.itemModelAll[index]),
+                  onTap: () => homeController.toItem(snapshot.data![index]),
                   child: Container(
                     margin: const EdgeInsets.only(
                         left: 10, top: 5, bottom: 5, right: 5),
                     padding: const EdgeInsets.all(5),
-                    // height: sizeH,
-                    // width: sizeW,
                     decoration: BoxDecoration(
                       color: ColorManager.white,
                       borderRadius: BorderRadius.circular(10),
@@ -73,7 +69,7 @@ class RowItemHome extends StatelessWidget {
                       children: [
                         CachedNetworkImage(
                           imageUrl:
-                              "${Hostting.imageItem}/${homeController.itemModelAll[index].images![0]}",
+                              "${Hostting.imageItem}/${snapshot.data![index].images![0]}",
                           placeholder: (context, url) =>
                               const ProgressHomeRow(),
                           errorWidget: (context, url, error) =>
@@ -83,15 +79,14 @@ class RowItemHome extends StatelessWidget {
                           fit: BoxFit.fill,
                         ),
                         Text(
-                          homeController.itemModelAll[index].name,
+                          snapshot.data![index].name,
                           style: FontDef.w500S11Cb,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              homeController.itemModelAll[index].price
-                                  .toString(),
+                              snapshot.data![index].price.toString(),
                               style: FontDef.w500S13Cb,
                             ),
                           ],

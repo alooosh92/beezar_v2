@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 Future<dynamic> conttactWithUser(String phone) {
   return Get.dialog(
     AlertDialog(
-      backgroundColor: ColorManager.litePrimaryColor,
+      backgroundColor: ColorManager.primaryColor,
       elevation: 3,
       insetPadding: const EdgeInsets.all(30),
       title: Row(

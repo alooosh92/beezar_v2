@@ -29,8 +29,8 @@ class ButtonContact extends StatelessWidget {
               height: 50,
               width: 50,
             ),
-            const Text(
-              "اتصال هاتفي",
+            Text(
+              text,
               style: FontDef.w700S16Cw,
             ),
           ],
