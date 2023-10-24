@@ -91,12 +91,12 @@ class ProfileEditScreen extends StatelessWidget {
                                 colorText: ColorManager.white);
                           } else {
                             Get.back();
-                            Get.snackbar("تحزير", "هناك خطا ما",
+                            Get.snackbar("تحذير", "هناك خطا ما",
                                 backgroundColor: ColorManager.primaryColor,
                                 colorText: ColorManager.white);
                           }
                         },
-                        text: 'حفط التغييرات',
+                        text: 'حفظ التغييرات',
                       )
                     ],
                   );
