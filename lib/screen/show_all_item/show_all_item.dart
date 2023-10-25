@@ -69,7 +69,7 @@ class ShowAllItem extends StatelessWidget {
                                               color: ColorManager.black,
                                               size: 15),
                                           label: Text(
-                                              "السعر: ${homeController.itemModelAll[index].price.toString()}",
+                                              "السعر: ${homeController.itemModelAll[index].price.toInt().toString()}",
                                               style: FontDef.w400S13Cb),
                                         ),
                                         TextButton.icon(

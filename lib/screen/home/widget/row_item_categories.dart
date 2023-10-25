@@ -1,6 +1,9 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
+import 'package:beezer_v2/res/hostting.dart';
 import 'package:beezer_v2/screen/home/home_controller.dart';
+import 'package:beezer_v2/widget/progress_home_row.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,16 +64,16 @@ class _RowItemCategoriesState extends State<RowItemCategories> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // CachedNetworkImage(
-                        //   imageUrl:
-                        //       '${Hostting.imageCategory}/${homeController.listGategoryModel[index].image}',
-                        //   placeholder: (context, url) =>
-                        //       const ProgressHomeRow(),
-                        //   errorWidget: (context, url, error) =>
-                        //       const Icon(Icons.error),
-                        //   height: 50,
-                        //   width: 50,
-                        // ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              '${Hostting.imageCategory}/${homeController.listGategoryModel[index].image}',
+                          placeholder: (context, url) =>
+                              const ProgressHomeRow(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          height: 50,
+                          width: 50,
+                        ),
                         Text(
                           homeController.listGategoryModel[index].name,
                           style: FontDef.w600S9Cb,
