@@ -34,8 +34,8 @@ Future<dynamic> conttactWithUser(String phone) {
             svg: "lib/assets/images/telephone-call.svg",
             text: "اتصال هاتفي",
             press: () async {
-              if (await canLaunchUrl(Uri.parse("tel:$phone"))) {
-                launchUrl(Uri.parse("tel:$phone"));
+              if (await canLaunchUrl(Uri.parse("tel:+$phone"))) {
+                launchUrl(Uri.parse("tel:+$phone"));
               }
             },
           ),
@@ -45,10 +45,10 @@ Future<dynamic> conttactWithUser(String phone) {
             text: "وتس اب",
             press: () async {
               if (await canLaunchUrl(
-                  Uri.parse("whatsapp://send?phone=$phone"))) {
-                launchUrl(Uri.parse("whatsapp://send?phone=$phone"));
+                  Uri.parse("whatsapp://send?phone=+$phone"))) {
+                launchUrl(Uri.parse("whatsapp://send?phone=+$phone"));
               } else {
-                launchUrl(Uri.parse("https://wa.me/$phone"));
+                launchUrl(Uri.parse("https://wa.me/+$phone"));
               }
             },
           ),

@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class ValidatorDef {
   static String? validatorEmail(val) {
     if (val == null || val.isEmpty) {
@@ -29,6 +31,9 @@ class ValidatorDef {
     }
     if ((val.toString()).length < 10) {
       return "رقم الهاتف غير صحيح";
+    }
+    if (!val.toString().isNumericOnly) {
+      return "يجب ان يكون رقم الهاتف من الشكل 9639XXXXXXXX";
     }
     return null;
   }
