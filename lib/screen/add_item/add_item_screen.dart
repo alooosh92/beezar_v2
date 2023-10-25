@@ -84,7 +84,7 @@ class AddItemScreen extends StatelessWidget {
                   TextFormFieldContactUsAndAddItem(
                     keyboard: TextInputType.text,
                     controller: name,
-                    label: "اسم المادة",
+                    label: "عنوان الإعلان ",
                     validator: (value) => ValidatorDef.validatorName(value),
                   ),
                   TextFormFieldContactUsAndAddItem(

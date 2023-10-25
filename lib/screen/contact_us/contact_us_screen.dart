@@ -35,44 +35,46 @@ class ContactUsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(right: 15, left: 15),
           child: Form(
             key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "lib/assets/images/tr-logo.png",
-                  height: 150,
-                  width: 150,
-                ),
-                const Text(
-                  "تواصل معنا",
-                  style: FontDef.w700S24Cb,
-                ),
-                DropdownButtonFormField<String?>(
-                  decoration: borderDef(""),
-                  items: listDropDawnSupject,
-                  onChanged: (value) {},
-                  hint: const Text("إختر الموضوع"),
-                  style: FontDef.w400S14Cg,
-                ),
-                TextFormFieldContactUsAndAddItem(
-                  controller: name,
-                  keyboard: TextInputType.text,
-                  label: "الاسم",
-                ),
-                TextFormFieldContactUsAndAddItem(
-                  controller: email,
-                  keyboard: TextInputType.emailAddress,
-                  label: "البريد الالكتروني",
-                ),
-                TextFormFieldContactUsAndAddItem(
-                  controller: massege,
-                  keyboard: TextInputType.text,
-                  label: "نص الرسالة",
-                  minLine: 4,
-                ),
-                ButtonSend(press: () {}, hint: "ارسال"),
-                const RowIcon()
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "lib/assets/images/tr-logo.png",
+                    height: 150,
+                    width: 150,
+                  ),
+                  const Text(
+                    "تواصل معنا",
+                    style: FontDef.w700S24Cb,
+                  ),
+                  DropdownButtonFormField<String?>(
+                    decoration: borderDef(""),
+                    items: listDropDawnSupject,
+                    onChanged: (value) {},
+                    hint: const Text("إختر الموضوع"),
+                    style: FontDef.w400S14Cg,
+                  ),
+                  TextFormFieldContactUsAndAddItem(
+                    controller: name,
+                    keyboard: TextInputType.text,
+                    label: "الاسم",
+                  ),
+                  TextFormFieldContactUsAndAddItem(
+                    controller: email,
+                    keyboard: TextInputType.emailAddress,
+                    label: "البريد الالكتروني",
+                  ),
+                  TextFormFieldContactUsAndAddItem(
+                    controller: massege,
+                    keyboard: TextInputType.text,
+                    label: "نص الرسالة",
+                    minLine: 4,
+                  ),
+                  ButtonSend(press: () {}, hint: "ارسال"),
+                  const RowIcon()
+                ],
+              ),
             ),
           ),
         ),

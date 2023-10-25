@@ -3,6 +3,7 @@ import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/res/validator_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
+import 'package:beezer_v2/screen/home/page/profile_screen.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
 import 'package:beezer_v2/widget/input_decration_def.dart';
 import 'package:beezer_v2/widget/list_region.dart';
@@ -86,6 +87,7 @@ class ProfileEditScreen extends StatelessWidget {
                           var b = await authController.updateUser(user);
                           if (b) {
                             Get.back();
+                            Get.to(const ProfileScreen());
                             Get.snackbar("ملاحظة", "تم تعديل البيانات بنجاح",
                                 backgroundColor: ColorManager.primaryColor,
                                 colorText: ColorManager.white);

@@ -8,6 +8,9 @@ var listRegion = [
   dropDownMenuItemDef("منبج", "منبج"),
   dropDownMenuItemDef("جرابلس", "جرابلس"),
   dropDownMenuItemDef("عين عيسى", "عين عيسى"),
+   dropDownMenuItemDef("الغندورة ", "الغندورة "),
+  dropDownMenuItemDef("تل ابيض", "تل ابيض"),
+  dropDownMenuItemDef("رأس العين", "رأس العين"),
   dropDownMenuItemDef("عزاز", "عزاز"),
   dropDownMenuItemDef("عفرين", "عفرين"),
   dropDownMenuItemDef("ادلب", "ادلب"),
@@ -36,4 +39,7 @@ var listRegion = [
   dropDownMenuItemDef("طرطوس", "طرطوس"),
   dropDownMenuItemDef("قنيطرة", "قنيطرة"),
   dropDownMenuItemDef("درعا", "درعا"),
+ 
+
+  
 ];
