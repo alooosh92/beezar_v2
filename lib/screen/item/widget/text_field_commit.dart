@@ -1,7 +1,9 @@
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/item/item_controller.dart';
+import 'package:beezer_v2/widget/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class TextFieldCommit extends StatelessWidget {
   const TextFieldCommit({super.key, required this.id});
@@ -18,11 +20,17 @@ class TextFieldCommit extends StatelessWidget {
         isDense: true,
         suffixIcon: IconButton(
           onPressed: () async {
-            var b = await itemController.writeComment(id, com.text);
-            if (!b) {
-              Get.snackbar("خطأ", "حدث خطأ ما الرجاء التواصل مع المسؤول");
+            var storeg = GetStorage();
+            var token = storeg.read("token");
+            if (token == null) {
+              loginAlert();
+            } else {
+              var b = await itemController.writeComment(id, com.text);
+              if (!b) {
+                Get.snackbar("خطأ", "حدث خطأ ما الرجاء التواصل مع المسؤول");
+              }
+              com.text = "";
             }
-            com.text = "";
           },
           icon: const Icon(Icons.send_outlined),
         ),

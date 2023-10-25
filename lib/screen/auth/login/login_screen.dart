@@ -93,6 +93,13 @@ class LoginScreen extends StatelessWidget {
                         text: "ليس لديك حساب؟",
                         textPress: "إنشاء حساب",
                       ),
+                      TextButton(
+                        onPressed: () => Get.offAll(const HomeScreen()),
+                        child: Text(
+                          "تصفح الإعلانات كزائر",
+                          style: FontDef.w700S16Cp,
+                        ),
+                      )
                     ],
                   ),
                 ),

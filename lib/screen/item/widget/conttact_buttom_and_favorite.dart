@@ -2,10 +2,12 @@ import 'package:beezer_v2/model/item_model.dart';
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/home/home_controller.dart';
+import 'package:beezer_v2/widget/bottom_bar.dart';
 import 'package:beezer_v2/widget/cottact_with_user.dart';
 import 'package:beezer_v2/widget/progress_def.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ConttactButtomAndFavorite extends StatefulWidget {
   const ConttactButtomAndFavorite({super.key, required this.item});
@@ -40,21 +42,27 @@ class _ConttactButtomAndFavoriteState extends State<ConttactButtomAndFavorite> {
           ),
           ElevatedButton(
             onPressed: () async {
-              progressDef();
-              HomeController homeController = Get.find();
-              var b = await homeController.addDeleteFavourite(widget.item);
-              if (b) {
-                Get.back();
-                Get.snackbar(
-                    backgroundColor: ColorManager.primaryColor,
-                    colorText: ColorManager.white,
-                    "ملاحظة",
-                    !fav
-                        ? "تم اضافة الاعلان الى المفضلة"
-                        : "تم حذف الاعلان من المفضلة");
-                setState(() {});
+              var storeg = GetStorage();
+              var token = storeg.read("token");
+              if (token == null) {
+                loginAlert();
               } else {
-                Get.back();
+                progressDef();
+                HomeController homeController = Get.find();
+                var b = await homeController.addDeleteFavourite(widget.item);
+                if (b) {
+                  Get.back();
+                  Get.snackbar(
+                      backgroundColor: ColorManager.primaryColor,
+                      colorText: ColorManager.white,
+                      "ملاحظة",
+                      !fav
+                          ? "تم اضافة الاعلان الى المفضلة"
+                          : "تم حذف الاعلان من المفضلة");
+                  setState(() {});
+                } else {
+                  Get.back();
+                }
               }
             },
             style: const ButtonStyle(

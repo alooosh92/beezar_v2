@@ -1,7 +1,9 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/screen/add_item/add_item_screen.dart';
+import 'package:beezer_v2/widget/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ButtonAddItem extends StatelessWidget {
   const ButtonAddItem({
@@ -13,7 +15,15 @@ class ButtonAddItem extends StatelessWidget {
     return FloatingActionButton(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      onPressed: () => Get.to(const AddItemScreen()),
+      onPressed: () {
+        var storeg = GetStorage();
+        var token = storeg.read("token");
+        if (token == null) {
+          loginAlert();
+        } else {
+          Get.to(const AddItemScreen());
+        }
+      },
       child: Container(
         height: 70,
         width: 70,

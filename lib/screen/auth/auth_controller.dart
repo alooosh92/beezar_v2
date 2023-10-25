@@ -81,6 +81,8 @@ class AuthController extends GetxController {
         return true;
       }
     }
+    final storeg = GetStorage();
+    storeg.remove("token");
     return false;
   }
 

@@ -5,11 +5,13 @@ import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/home/home_controller.dart';
 import 'package:beezer_v2/screen/item/item_screen.dart';
 import 'package:beezer_v2/screen/massege/massege.dart';
+import 'package:beezer_v2/widget/bottom_bar.dart';
 import 'package:beezer_v2/widget/drop_down_buttom_def.dart';
 import 'package:beezer_v2/widget/input_decration_def.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 AppBar appBarHome(BuildContext context) {
   HomeController homeController = Get.find();
@@ -72,7 +74,13 @@ AppBar appBarHome(BuildContext context) {
         init: homeController,
         builder: (controller) => IconButton(
           onPressed: () {
-            Get.to(const MassegeScreen());
+            var storeg = GetStorage();
+            var token = storeg.read("token");
+            if (token == null) {
+              loginAlert();
+            } else {
+              Get.to(const MassegeScreen());
+            }
           },
           icon: Stack(
             children: [

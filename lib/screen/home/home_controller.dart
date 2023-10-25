@@ -6,6 +6,7 @@ import 'package:beezer_v2/model/sub_gategory_model.dart';
 import 'package:beezer_v2/res/hostting.dart';
 import 'package:beezer_v2/screen/item/item_screen.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
@@ -203,16 +204,19 @@ class HomeController extends GetxController {
   }
 
   Future<void> getMassege() async {
-    http.Response response =
-        await http.get(Hostting.getMassege, headers: Hostting().getHeader());
-
-    if (response.statusCode == 200) {
-      listMassege.clear();
-      var body = jsonDecode(response.body);
-      for (var element in body["data"]) {
-        listMassege.add(Massege.fromJson(element));
+    var storeg = GetStorage();
+    var token = storeg.read("token");
+    if (token != null) {
+      http.Response response =
+          await http.get(Hostting.getMassege, headers: Hostting().getHeader());
+      if (response.statusCode == 200) {
+        listMassege.clear();
+        var body = jsonDecode(response.body);
+        for (var element in body["data"]) {
+          listMassege.add(Massege.fromJson(element));
+        }
+        refresh();
       }
-      refresh();
     }
   }
 }

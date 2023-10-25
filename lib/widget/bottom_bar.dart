@@ -1,3 +1,5 @@
+import 'package:beezer_v2/res/font_def.dart';
+import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/home/home_controller.dart';
 import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:beezer_v2/screen/home/page/my_favorite_screen.dart';
@@ -6,6 +8,7 @@ import 'package:beezer_v2/screen/home/page/profile_screen.dart';
 import 'package:beezer_v2/widget/icon_buttom_bar_def.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class BottomNavigationBarDef extends StatelessWidget {
   const BottomNavigationBarDef({
@@ -43,8 +46,14 @@ class BottomNavigationBarDef extends StatelessWidget {
                         order: 1,
                         check: controller.pageNumber.value,
                         press: () {
-                          homeController.pageNumber.value = 1;
-                          Get.to(const MyItemScreen());
+                          var storeg = GetStorage();
+                          var token = storeg.read("token");
+                          if (token == null) {
+                            loginAlert();
+                          } else {
+                            homeController.pageNumber.value = 1;
+                            Get.to(const MyItemScreen());
+                          }
                         }),
                   ],
                 ),
@@ -55,21 +64,35 @@ class BottomNavigationBarDef extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButtomBarDef(
-                        icon: Icons.favorite_border,
-                        order: 2,
-                        check: controller.pageNumber.value,
-                        press: () {
+                      icon: Icons.favorite_border,
+                      order: 2,
+                      check: controller.pageNumber.value,
+                      press: () {
+                        var storeg = GetStorage();
+                        var token = storeg.read("token");
+                        if (token == null) {
+                          loginAlert();
+                        } else {
                           homeController.pageNumber.value = 2;
                           Get.to(const MyFavoriteScreen());
-                        }),
+                        }
+                      },
+                    ),
                     IconButtomBarDef(
-                        icon: Icons.person_outline_outlined,
-                        order: 3,
-                        check: controller.pageNumber.value,
-                        press: () {
+                      icon: Icons.person_outline_outlined,
+                      order: 3,
+                      check: controller.pageNumber.value,
+                      press: () {
+                        var storeg = GetStorage();
+                        var token = storeg.read("token");
+                        if (token == null) {
+                          loginAlert();
+                        } else {
                           homeController.pageNumber.value = 3;
                           Get.to(const ProfileScreen());
-                        }),
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -79,4 +102,39 @@ class BottomNavigationBarDef extends StatelessWidget {
       },
     );
   }
+}
+
+Future<dynamic> loginAlert() {
+  return Get.dialog(
+    AlertDialog(
+      actions: [
+        TextButton(
+          onPressed: () {
+            Get.offAll(const LoginScreen());
+          },
+          child: Text(
+            "تسجيل دخول",
+            style: FontDef.w700S13Cp,
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: Text(
+            "إلغاء",
+            style: FontDef.w700S13Cb,
+          ),
+        ),
+      ],
+      content: Text(
+        "لا يمكن تنفيذ هذا الطلب بدون تسجيل دخول",
+        style: FontDef.w400S15Cb,
+      ),
+      title: Text(
+        "تحذير",
+        style: FontDef.w400S13Cb,
+      ),
+    ),
+  );
 }
