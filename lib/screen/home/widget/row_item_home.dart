@@ -3,6 +3,7 @@ import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/res/hostting.dart';
 import 'package:beezer_v2/screen/home/home_controller.dart';
+import 'package:beezer_v2/widget/change_date_to_day.dart';
 import 'package:beezer_v2/widget/progress_home_row.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -86,20 +87,29 @@ class RowItemHome extends StatelessWidget {
                         ),
                         Text(
                           snapshot.data![index].name,
-                          style: FontDef.w500S11Cb,
+                          style: FontDef.w700S12Cb,
                         ),
-                        Expanded(
+                        SizedBox(
+                          width: sizeW - 20,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Icon(
-                                Icons.location_on_outlined,
-                                size: 20,
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on_outlined,
+                                    size: 16,
+                                  ),
+                                  Text(
+                                    snapshot.data![index].address,
+                                    style: FontDef.w500S11Cb,
+                                  ),
+                                ],
                               ),
                               Text(
-                                snapshot.data![index].address,
-                                style: FontDef.w500S13Cb,
-                              ),
+                                changeDateToDay(snapshot.data![index].date),
+                                style: FontDef.w500S11Cb,
+                              )
                             ],
                           ),
                         ),

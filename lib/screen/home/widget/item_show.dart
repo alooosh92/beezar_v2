@@ -28,7 +28,7 @@ class ItemShow extends StatelessWidget {
               RowItemHome(
                   future: homeController.getAllItems(false),
                   sizeH: 210,
-                  sizeW: 140),
+                  sizeW: 150),
               RowShowAll(press: () {}, text: "المفضلة"),
               RowItemHome(
                   future: homeController.getFavourite(null),
