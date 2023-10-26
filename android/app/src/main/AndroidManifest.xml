@@ -16,7 +16,7 @@
          </intent>
     </queries>
     <application
-        android:label="beezer_v2"
+        android:label="بيزار"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
