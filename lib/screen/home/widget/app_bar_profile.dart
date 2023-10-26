@@ -7,14 +7,11 @@ import 'package:gradient_borders/gradient_borders.dart';
 
 AppBar appBarprofile(BuildContext context) {
   return AppBar(
-    toolbarHeight: 100,
+    // toolbarHeight: 100,
     backgroundColor: Colors.transparent,
     shadowColor: Colors.transparent,
     elevation: 0,
-    title: const SizedBox(
-      height: 25,
-      child: Text("الصفحة الشخصية", style: FontDef.w700182Cb),
-    ),
+    title: Text("الصفحة الشخصية", style: FontDef.w700182Cb),
     centerTitle: true,
     leading: Padding(
       padding: const EdgeInsets.all(10.0),
@@ -25,7 +22,7 @@ AppBar appBarprofile(BuildContext context) {
       ),
     ),
     bottom: PreferredSize(
-      preferredSize: const Size(200, 120),
+      preferredSize: const Size(200, 150),
       child: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
         child: Row(

@@ -1,6 +1,7 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 AppBar appBar(BuildContext context) {
   return AppBar(
@@ -45,6 +46,12 @@ AppBar appBar(BuildContext context) {
         ),
       )
     ],
+    leading: IconButton(
+        onPressed: () => Get.back(),
+        icon: Icon(
+          Icons.arrow_back,
+          size: 30,
+        )),
     backgroundColor: Colors.transparent,
     elevation: 0,
   );

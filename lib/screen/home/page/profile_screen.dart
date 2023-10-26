@@ -35,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text("اسم المستخدم", style: FontDef.w500152Cg),
+                  Text(storeg.read("name"), style: FontDef.w500152Cg),
                   Text(storeg.read("MyEmail"), style: FontDef.w700182Cb),
                   const SizedBox(
                     height: 20,

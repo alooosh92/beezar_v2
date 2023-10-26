@@ -31,6 +31,7 @@ class AuthController extends GetxController {
       var res = jsonDecode(response.body);
       userModel = UserModel.fromJson(res["user"]);
       storeg.write("token", res["token"]);
+      storeg.write("name", userModel.name);
       if (remmberMy) {
         storeg.write("MyEmail", email);
         storeg.write("MyPassword", password);
@@ -50,6 +51,7 @@ class AuthController extends GetxController {
       final storeg = GetStorage();
       var res = jsonDecode(response.body);
       userModel = UserModel.fromJson(res["user"]);
+      storeg.write("name", userModel.name);
       storeg.write("token", res["token"]);
       if (remmberMy) {
         storeg.write("MyEmail", userModel.email);
@@ -92,6 +94,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final storeg = GetStorage();
       storeg.remove("token");
+      storeg.remove("name");
       return true;
     }
     return false;
@@ -103,6 +106,9 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       var user = UserModel.fromJson(body["data"]);
+      var storeg = GetStorage();
+      storeg.write("name", user.name);
+      storeg.write("MyEmail", user.email);
       return user;
     }
     return null;
@@ -112,6 +118,8 @@ class AuthController extends GetxController {
     http.Response response = await http.post(Hostting.updateUserNew,
         body: userModel.toJson(), headers: Hostting().getHeader());
     if (response.statusCode == 200) {
+      var storeg = GetStorage();
+      storeg.write("name", userModel.name);
       return true;
     }
     return false;
@@ -136,7 +144,8 @@ class AuthController extends GetxController {
           var res = jsonDecode(response.body);
           userModel = UserModel.fromJson(res["user"]);
           storeg.write("token", res["token"]);
-          storeg.write("MyEmail", user.email);
+          storeg.write("MyEmail", userModel.email);
+          storeg.write("name", userModel.name);
           storeg.remove("MyPassword");
           return Get.offAll(const HomeScreen());
         } else {
