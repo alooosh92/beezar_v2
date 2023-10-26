@@ -34,9 +34,7 @@ class UserPolicy extends StatelessWidget {
                       return SingleTerm(
                         termDet:
                             userPoliceController.listPolice[index].policies[0],
-                        //bezarpolicyTerms[index]["termDet"].toString(),
                         termTitle: userPoliceController.listPolice[index].title,
-                        // bezarpolicyTerms[index]["termTitle"].toString(),
                       );
                     },
                   ),
