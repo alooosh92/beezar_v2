@@ -54,6 +54,7 @@ class ShowAllItem extends StatelessWidget {
                                     homeController
                                         .itemModelAll[index].description,
                                     overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                     style: FontDef.w400S13Cb,
                                   ),
                                   SingleChildScrollView(
