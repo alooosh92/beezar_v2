@@ -1,6 +1,5 @@
-//2023-10-25 alaa
+//2023-10-28 alaa
 import 'dart:io';
-
 import 'package:beezer_v2/res/binding_def.dart';
 import 'package:beezer_v2/screen/auth/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
