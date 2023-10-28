@@ -71,8 +71,13 @@ class RowItemHome extends StatelessWidget {
                         Banner(
                           location: BannerLocation.topEnd,
                           // color: ColorManager.primaryColor,
-                          message:
-                              "السعر: ${snapshot.data![index].price.toInt().toString()}",
+                          message: homeController.listGategoryModel.any(
+                                  (element) =>
+                                      element.id ==
+                                          snapshot.data![index].categoryId &&
+                                      element.name == "الوطائف الشاغرة")
+                              ? "الراتب: ${snapshot.data![index].price.toInt().toString()}"
+                              : "السعر: ${snapshot.data![index].price.toInt().toString()}",
                           child: CachedNetworkImage(
                             imageUrl:
                                 "${Hostting.imageItem}/${snapshot.data![index].images![0]}",

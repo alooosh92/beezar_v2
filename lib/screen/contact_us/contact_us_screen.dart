@@ -1,5 +1,6 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
+import 'package:beezer_v2/screen/contact_us/contact_us_controller.dart';
 import 'package:beezer_v2/screen/contact_us/widget/border_def.dart';
 import 'package:beezer_v2/screen/contact_us/widget/button_send.dart';
 import 'package:beezer_v2/screen/contact_us/widget/list_drop_dawn_subject.dart';
@@ -17,6 +18,7 @@ class ContactUsScreen extends StatelessWidget {
     TextEditingController name = TextEditingController();
     TextEditingController email = TextEditingController();
     TextEditingController massege = TextEditingController();
+    String? subject;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -51,7 +53,9 @@ class ContactUsScreen extends StatelessWidget {
                   DropdownButtonFormField<String?>(
                     decoration: borderDef(""),
                     items: listDropDawnSupject,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      subject = value;
+                    },
                     hint: const Text("إختر الموضوع"),
                     style: FontDef.w400S14Cg,
                   ),
@@ -71,7 +75,18 @@ class ContactUsScreen extends StatelessWidget {
                     label: "نص الرسالة",
                     minLine: 4,
                   ),
-                  ButtonSend(press: () {}, hint: "ارسال"),
+                  ButtonSend(
+                      press: () {
+                        ContactUsController contactUsController = Get.find();
+                        String mes =
+                            "${DateTime.now()}\n${name.text}\n${massege.text}";
+                        contactUsController.sendEmail(
+                          email.text,
+                          subject!,
+                          mes,
+                        );
+                      },
+                      hint: "ارسال"),
                   const RowIcon()
                 ],
               ),
