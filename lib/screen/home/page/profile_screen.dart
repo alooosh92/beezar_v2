@@ -1,5 +1,6 @@
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
+import 'package:beezer_v2/screen/auth/change_password/change_password.dart';
 import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/auth/update_user/profile_edit_screen.dart';
 import 'package:beezer_v2/screen/contact_us/contact_us_screen.dart';
@@ -44,6 +45,11 @@ class ProfileScreen extends StatelessWidget {
                     press: () => Get.to(const ProfileEditScreen()),
                     text: "تعديل الصفحة الشخصية",
                     icon: Icons.edit,
+                  ),
+                  ProfileButton(
+                    press: () => Get.to(const ChangePassword()),
+                    text: "تعديل كلمة السر",
+                    icon: Icons.password_outlined,
                   ),
                   ProfileButton(
                     press: () => Get.to(const ContactUsScreen()),

@@ -70,7 +70,7 @@ class AuthController extends GetxController {
     return true;
   }
 
-  Future<bool> restPassword(String oldPassword, String newPassword) async {
+  Future<bool> restPassword(String newPassword) async {
     return true;
   }
 
