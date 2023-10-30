@@ -10,10 +10,6 @@ class MyFavoriteScreen extends StatelessWidget {
   const MyFavoriteScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    // HomeController homeController = Get.find();
-    // var list = homeController.itemModelAll.value
-    //     .where((element) => element.favorite)
-    //     .toList();
     return Scaffold(
       floatingActionButton: const ButtonAddItem(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

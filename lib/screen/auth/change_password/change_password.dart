@@ -1,12 +1,11 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
-import 'package:beezer_v2/res/validator_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
 import 'package:beezer_v2/screen/home/page/profile_screen.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
 import 'package:beezer_v2/widget/progress_def.dart';
 import 'package:beezer_v2/widget/progress_home_row.dart';
-import 'package:beezer_v2/widget/text_form_field_def.dart';
+import 'package:beezer_v2/widget/text_form_field_password_def.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +15,8 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthController authController = AuthController();
-    TextEditingController password = TextEditingController();
+    TextEditingController oldPassword = TextEditingController();
+    TextEditingController newPassword = TextEditingController();
     TextEditingController repassword = TextEditingController();
     final keyForm = GlobalKey<FormState>();
     return Scaffold(
@@ -47,29 +47,32 @@ class ChangePassword extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        TextFormFieldDeF(
-                          keyboard: TextInputType.text,
-                          label: 'كلمة السر الجديدة',
-                          controller: password,
+                        TextFormFielPassword(
+                          label: ' كلمة السر الحالية',
+                          controller: oldPassword,
                           paddingTop: 20,
-                          validator: (val) =>
-                              ValidatorDef.validatorPassword(val),
                         ),
-                        TextFormFieldDeF(
-                          keyboard: TextInputType.phone,
+                        TextFormFielPassword(
+                          label: 'كلمة السر الجديدة',
+                          controller: newPassword,
+                          paddingTop: 20,
+                        ),
+                        TextFormFielPassword(
                           label: 'تأكيد كلمة السر الجديدة',
                           controller: repassword,
                           paddingTop: 20,
-                          validator: (val) =>
-                              ValidatorDef.validatorPassword(val),
                         ),
                         const SizedBox(height: 40),
                         ElevatedButtonDef(
                           press: () async {
                             if (keyForm.currentState!.validate()) {
-                              if (password.text == repassword.text) {
+                              if (newPassword.text == repassword.text) {
                                 progressDef();
-                                var b = await authController.restPassword("");
+                                var b = await authController.restPassword(
+                                  confirmPassword: repassword.text,
+                                  currentPassword: oldPassword.text,
+                                  newPassword: newPassword.text,
+                                );
                                 if (b) {
                                   Get.back();
                                   Get.to(const ProfileScreen());

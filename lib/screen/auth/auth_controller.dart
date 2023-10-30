@@ -70,9 +70,19 @@ class AuthController extends GetxController {
     return true;
   }
 
-  Future<bool> restPassword(String newPassword) async {
-    http.Response response = await http.put(Hostting.updatePasswordUser,
-        headers: Hostting().getHeader(), body: {"password": newPassword});
+  Future<bool> restPassword(
+      {required newPassword,
+      required String confirmPassword,
+      required String currentPassword}) async {
+    http.Response response = await http.put(
+      Hostting.updatePasswordUser,
+      headers: Hostting().getHeader(),
+      body: {
+        "new_password": newPassword,
+        "confirm_password": confirmPassword,
+        "current_password": currentPassword,
+      },
+    );
     if (response.statusCode == 200) {
       final storeg = GetStorage();
       storeg.write("MyPassword", newPassword);

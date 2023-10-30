@@ -45,27 +45,24 @@ class RegisterScreenOne extends StatelessWidget {
                 Column(
                   children: [
                     TextFormFieldDeF(
-                        label: "الإسم الكامل",
-                        controller: name,
-                        paddingTop: 10,
-                        validator: (val) {
-                          return ValidatorDef.validatorname(val);
-                        }),
+                      label: "الإسم الكامل",
+                      controller: name,
+                      paddingTop: 10,
+                      validator: (val) => ValidatorDef.validatorname(val),
+                    ),
                     TextFormFieldDeF(
-                        label: "بريدك الإلكتروني",
-                        controller: email,
-                        paddingTop: 30,
-                        validator: (val) {
-                          return ValidatorDef.validatorEmail(val);
-                        }),
+                      label: "بريدك الإلكتروني",
+                      controller: email,
+                      paddingTop: 30,
+                      validator: (val) => ValidatorDef.validatorEmail(val),
+                    ),
                     TextFormFieldDeF(
-                        label: "رقم الجوال",
-                        controller: phone,
-                        paddingTop: 30,
-                        keyboard: TextInputType.phone,
-                        validator: (val) {
-                          return ValidatorDef.validatorPhone(val);
-                        }),
+                      label: "رقم الجوال",
+                      controller: phone,
+                      paddingTop: 30,
+                      keyboard: TextInputType.phone,
+                      validator: (val) => ValidatorDef.validatorPhone(val),
+                    ),
                     DropdownButtonFormField(
                       padding: const EdgeInsets.only(top: 30),
                       decoration: inputDecorationDef(null, "المحافظة"),

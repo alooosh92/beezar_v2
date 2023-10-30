@@ -4,7 +4,7 @@ import 'package:mailer/smtp_server.dart';
 
 class ContactUsController extends GetxController {
   String email = "info@arg-tr.com";
-  String possword = "898902aa";
+  String possword = "beezar2023";
   String host = "sxb1plzcpnl490364.prod.sxb1.secureserver.net";
   int port = 465;
 
