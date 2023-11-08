@@ -1,3 +1,5 @@
+import 'package:beezer_v2/res/color_manager.dart';
+import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/user_policy/user_policy_controller.dart';
 import 'package:beezer_v2/screen/user_policy/widget/accept_button.dart';
 import 'package:beezer_v2/screen/user_policy/widget/appbar_user_policy.dart';
@@ -41,11 +43,17 @@ class UserPolicy extends StatelessWidget {
                 ),
                 AcceptButton(
                   isRegister: isRegister,
-                )
+                ),
+                
               ],
             );
           },
         ),
+      ),
+        floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.back(),
+        child: const Text('رجوع', style: FontDef.w600S12Cw,),
+        backgroundColor: ColorManager.primaryColor,
       ),
     );
   }

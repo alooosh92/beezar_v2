@@ -51,12 +51,14 @@ class ItemController extends GetxController {
       Hostting.deleteComment(id),
       headers: Hostting().getHeader(),
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 && response.body.toString().isNotEmpty) {
       await getComment(itemId);
       Get.back();
       return true;
     }
     Get.back();
-    return false;
+    return false; 
+    
+ 
   }
 }

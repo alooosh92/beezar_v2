@@ -1,3 +1,4 @@
+
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/item/item_controller.dart';
@@ -23,15 +24,22 @@ class CommitDef extends StatelessWidget {
     ItemController itemController = Get.find();
     return InkWell(
       onLongPress: () => Get.dialog(AlertDialog(
-        title: const Text("تحزير"),
-        content: const Text("هل انت متأكد من حذف المنشور؟"),
+        title: const Text("تحذير"),
+        content: const Text("هل انت متأكد من حذف التعليق ؟"),
         actions: [
           TextButton(
               onPressed: () async {
-                var b = await itemController.deleteComment(id, itemId);
+                var b = await itemController.deleteComment(
+                  id, itemId);
+
                 if (b) {
                   Get.back();
                   Get.snackbar("معلومات", "تم حذف التعليق بنجاح",
+                      backgroundColor: ColorManager.primaryColor,
+                      colorText: ColorManager.white);
+                }
+                else{
+                  Get.snackbar("تنبيه", "عذراً لا تملك الصلاحية لحذف التعليق",
                       backgroundColor: ColorManager.primaryColor,
                       colorText: ColorManager.white);
                 }

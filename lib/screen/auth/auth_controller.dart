@@ -92,16 +92,14 @@ class AuthController extends GetxController {
   }
 
   Future<bool> checkToken() async {
-    final storage = GetStorage();
-    if (storage.read("token") != null && storage.read("token") != "") {
-      http.Response response = await http.post(Hostting.checkTokenValidity,
+    GetStorage storage = GetStorage();
+    if ( await storage.read("token") != null) {
+      http.Response response = await http.get(Hostting.getUser,
           headers: Hostting().getHeader());
       if (response.statusCode == 200) {
         return true;
       }
     }
-    final storeg = GetStorage();
-    storeg.remove("token");
     return false;
   }
 

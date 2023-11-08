@@ -1,11 +1,13 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 AppBar appBar(BuildContext context) {
   return AppBar(
     toolbarHeight: 140,
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    leading: Icon(Icons.cabin,color: Colors.transparent,),
     actions: [
       SizedBox(
         width: MediaQuery.sizeOf(context).width,
@@ -17,7 +19,7 @@ AppBar appBar(BuildContext context) {
               children: [
                 Image.asset(
                   'lib/assets/images/tr-logo.png',
-                  width: 100,
+                  width:90,
                 ),
                 const Column(
                   children: [
@@ -36,7 +38,7 @@ AppBar appBar(BuildContext context) {
               ],
             ),
             const Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(5.0),
               child: Divider(
                 color: ColorManager.black,
                 thickness: 1,
@@ -46,13 +48,7 @@ AppBar appBar(BuildContext context) {
         ),
       )
     ],
-    leading: IconButton(
-        onPressed: () => Get.back(),
-        icon: Icon(
-          Icons.arrow_back,
-          size: 30,
-        )),
-    backgroundColor: Colors.transparent,
-    elevation: 0,
+
   );
+
 }

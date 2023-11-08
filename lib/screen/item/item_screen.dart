@@ -6,21 +6,25 @@ import 'package:beezer_v2/screen/item/widget/info_user_contact.dart';
 import 'package:beezer_v2/screen/item/widget/item_info_and_buttom_scroll.dart';
 import 'package:beezer_v2/screen/item/widget/page_builder_image.dart';
 import 'package:beezer_v2/screen/item/widget/row_comment.dart';
+import 'package:beezer_v2/screen/item/widget/show_commit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ItemScreen extends StatelessWidget {
   const ItemScreen({super.key, required this.item});
   final ItemModel item;
+
   @override
   Widget build(BuildContext context) {
     ItemController itemController = Get.find();
+    ScrollController scrollController = ScrollController();
     return Scaffold(
       appBar: appBarItem(),
       body: FutureBuilder(
         future: itemController.getComment(item.id),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return SingleChildScrollView(
+            controller: scrollController,
             child: Column(
               children: [
                 PageBuilderImage(images: item.images!),
@@ -40,9 +44,10 @@ class ItemScreen extends StatelessWidget {
                   item: item,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [RowComment(item: item)],
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [RowComment(item: item, scrollController: scrollController,)],
                 ),
+                showCommit(context, item.id),
               ],
             ),
           );

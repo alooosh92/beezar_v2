@@ -5,6 +5,7 @@ import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/home/page/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -42,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           }
+          GetStorage();
           Timer(const Duration(seconds: 1), () async {
             if (await _authController.checkToken()) {
               Get.offAll(const HomeScreen());
