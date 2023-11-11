@@ -1,7 +1,9 @@
 import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
+import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/auth/register/register_screen_one.dart';
 import 'package:beezer_v2/widget/elevated_button_def.dart';
+import 'package:beezer_v2/widget/policy_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,34 +45,48 @@ class _AcceptButtonState extends State<AcceptButton> {
             ],
           ),
           const SizedBox(height: 16.0),
-          ElevatedButtonDef(
-            press: () {
-              if (_check) {
-                Get.off(const RegisterScreenOne());
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text(
-                        'يجب الموافقة على سياسة الاستخدام',
-                      ),
-                      content: const Text(
-                          'لإكمال التسجيل يجب الموافقة على سياسة الاستخدام'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('موافق'),
-                        ),
-                      ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              PolicyBtn(
+                press: () {
+                  if (_check) {
+                    Get.off(const RegisterScreenOne());
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text(
+                            'يجب الموافقة على سياسة الاستخدام',
+                          ),
+                          content: const Text(
+                              'لإكمال التسجيل يجب الموافقة على سياسة الاستخدام'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('موافق'),
+                            ),
+                          ],
+                        );
+                      },
                     );
-                  },
-                );
-              }
-            },
-            text: 'استمرار',
+                  }
+                },
+                text: 'استمرار',
+              ),
+
+
+              // back btn
+              PolicyBtn(
+                press: () {
+                  Get.to(const LoginScreen());
+                },
+                text: 'عودة للخلف',
+              ),
+            ],
           )
         ],
       ),

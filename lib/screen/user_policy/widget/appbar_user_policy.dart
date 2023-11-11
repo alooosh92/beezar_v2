@@ -14,7 +14,7 @@ AppBar appBar(BuildContext context) {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
@@ -38,7 +38,7 @@ AppBar appBar(BuildContext context) {
               ],
             ),
             const Padding(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(8.0),
               child: Divider(
                 color: ColorManager.black,
                 thickness: 1,
