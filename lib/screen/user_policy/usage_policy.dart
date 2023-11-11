@@ -50,11 +50,15 @@ class UserPolicy extends StatelessWidget {
           },
         ),
       ),
-        floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.back(),
-        child: const Text('رجوع', style: FontDef.w600S12Cw,),
-        backgroundColor: ColorManager.primaryColor,
-      ),
+        
+        floatingActionButton: Visibility(
+          visible: !isRegister,
+          child: FloatingActionButton(
+          onPressed: () => Get.back(),
+          child: const Text('رجوع', style: FontDef.w600S12Cw,),
+          backgroundColor: ColorManager.primaryColor,
+              ),
+        ),
     );
   }
 }
