@@ -2,7 +2,6 @@ import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/auth/register/register_screen_one.dart';
-import 'package:beezer_v2/widget/elevated_button_def.dart';
 import 'package:beezer_v2/widget/policy_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

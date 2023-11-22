@@ -1,3 +1,4 @@
+import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/auth/auth_controller.dart';
 import 'package:beezer_v2/screen/auth/change_password/change_password.dart';
@@ -13,11 +14,30 @@ import 'package:beezer_v2/widget/progress_def.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:rating_dialog/rating_dialog.dart';
+import 'package:store_redirect/store_redirect.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final _dialog = RatingDialog(
+      image: Image.asset('lib/assets/images/logoo 1.png', width: 60,),
+      title: Text('قيم بيزار', textAlign:TextAlign.center ,style: TextStyle(color:ColorManager.darkPrimaryColor),), 
+      starSize: 30,
+      submitButtonText: 'أرسل',
+      commentHint: 'اخبرنا برأيك',
+      onCancelled: ()=>print('cancelled'),
+      onSubmitted: (Response){
+      StoreRedirect.redirect(
+            androidAppId: 'com.beezar.android',
+            iOSAppId: '',
+            );
+      },
+      );
+
+
+
+
     final storeg = GetStorage();
     return Scaffold(
       floatingActionButton: const ButtonAddItem(),
@@ -62,6 +82,13 @@ class ProfileScreen extends StatelessWidget {
                     )),
                     text: "شروط الاستخدام",
                     icon: Icons.policy,
+                  ),
+                  ProfileButton(
+                    press: () => showDialog(
+                      context: context, 
+                      builder: (context)=>_dialog),
+                    text: "قيم بيزار",
+                    icon: Icons.star_border,
                   ),
                   ProfileButton(
                     press: () async {
