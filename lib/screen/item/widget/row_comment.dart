@@ -1,5 +1,4 @@
 import 'package:beezer_v2/model/item_model.dart';
-import 'package:beezer_v2/res/color_manager.dart';
 import 'package:beezer_v2/res/font_def.dart';
 import 'package:beezer_v2/screen/item/item_controller.dart';
 import 'package:beezer_v2/screen/item/widget/show_commit.dart';
