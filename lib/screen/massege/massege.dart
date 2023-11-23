@@ -40,6 +40,7 @@ class MassegeScreen extends StatelessWidget {
                   onTap: () {
                     if (item != null) {
                       homeController.toItem(item);
+                      
                     }
                   },
                   child: Column(

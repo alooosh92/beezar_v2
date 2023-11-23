@@ -80,19 +80,19 @@ AppBar appBarHome(BuildContext context) {
               loginAlert();
             } else {
               Get.to(const MassegeScreen());
+              
             }
           },
           icon: Stack(
             children: [
-
-            homeController.listMassege.value.isNotEmpty?Image.asset('lib/assets/images/noempity.gif',width: 30,)
-            : Image.asset('lib/assets/images/empity.jpeg',width:30,),
+            homeController.listMassege.value.isEmpty?Image.asset('lib/assets/images/empity.jpeg',width: 30,)
+            : Image.asset('lib/assets/images/noempity.gif',width:30,),
             Visibility(
               visible:homeController.listMassege.value.isNotEmpty,
               child:const Icon(
                    Icons.brightness_1,
                    color: ColorManager.red,
-                 size: 8, ))
+                 size: 8, )),
 
 
               // const Icon(Icons.notifications_none_outlined,
