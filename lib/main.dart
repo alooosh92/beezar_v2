@@ -1,4 +1,4 @@
-//2023-11-22 edit comments & rating app
+//2023-11-23 shaimaa build.gradle
 import 'dart:io';
 import 'package:beezer_v2/res/binding_def.dart';
 import 'package:beezer_v2/screen/auth/splash/splash_screen.dart';
@@ -19,7 +19,7 @@ class MyHttpOverrides extends HttpOverrides {
 void main() async {
   await GetStorage.init();
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const MyApp());
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
