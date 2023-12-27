@@ -79,7 +79,7 @@ class RegisterScreenTwo extends StatelessWidget {
                 Column(
                   children: [
                     const RowDividerTextDivider(),
-                    const GoogleFacebookIcon(),
+                     GoogleFacebookIcon(),
                     HaveAccount(
                       press: () => Get.off(const LoginScreen()),
                       text: "لديك حساب؟",

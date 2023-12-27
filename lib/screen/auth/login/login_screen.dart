@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                         text: "تسجيل دخول",
                       ),
                       const RowDividerTextDivider(),
-                      const GoogleFacebookIcon(),
+                       GoogleFacebookIcon(),
                       HaveAccount(
                         press: () =>
                             Get.off(const UserPolicy(isRegister: true)),

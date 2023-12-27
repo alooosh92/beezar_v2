@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:beezer_v2/model/login_user_model.dart';
 import 'package:beezer_v2/model/register_user_model.dart';
 import 'package:beezer_v2/model/user_model.dart';
@@ -7,6 +6,7 @@ import 'package:beezer_v2/res/hostting.dart';
 import 'package:beezer_v2/screen/auth/login/login_screen.dart';
 import 'package:beezer_v2/screen/auth/register/register_screen_one.dart';
 import 'package:beezer_v2/screen/home/page/home_screen.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,11 +16,49 @@ class AuthController extends GetxController {
   bool remmberMy = true;
   RegisterUserModel registerUserModel = RegisterUserModel();
   UserModel userModel = UserModel();
+  FacebookLogin _facebookLogin = FacebookLogin();
+  late bool isLoggedIn;
+  Map userData = {};
 
   void changeRemmberMy() {
     remmberMy = !remmberMy;
     update();
   }
+
+
+Future< void >facebookLogin()async {
+ FacebookLoginResult result = await _facebookLogin.logIn(
+  permissions: [FacebookPermission.email, FacebookPermission.publicProfile]);
+    final accessToken = result.accessToken!.token;
+     FacebookUserProfile? profile = await _facebookLogin.getUserProfile();
+     print(profile!.firstName);
+     print(profile.name);
+    final facebookEmail = await _facebookLogin.getUserEmail();
+    print(facebookEmail);
+  if(result.status == FacebookLoginStatus.success){
+    final storeg = GetStorage();
+    storeg.write("token",accessToken);
+    storeg.write("name",profile.name);
+    storeg.write("MyEmail",facebookEmail);
+    Get.to(const HomeScreen());
+     Get.snackbar(
+          "مرحباً بك ",
+          "أهلا بك${profile.name} بتطبيق بيزار ",
+          duration: const Duration(seconds: 3),
+          snackPosition: SnackPosition.TOP,
+        );
+
+  }else{
+     Get.snackbar(
+          "هناك مشكلة  ",
+          "لايمكنك الدخول ",
+          duration: const Duration(seconds: 3), 
+          snackPosition: SnackPosition.TOP,
+        );
+  }
+}
+
+
 
   Future<bool> login(String email, String password) async {
     LoginUserModel user = LoginUserModel(email: email, password: password);

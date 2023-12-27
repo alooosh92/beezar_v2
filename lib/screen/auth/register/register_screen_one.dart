@@ -94,7 +94,7 @@ class RegisterScreenOne extends StatelessWidget {
                       padding: 30,
                     ),
                     const RowDividerTextDivider(),
-                    const GoogleFacebookIcon(),
+                          GoogleFacebookIcon(),
                     HaveAccount(
                       press: () => Get.off(const LoginScreen()),
                       text: "لديك حساب؟",
