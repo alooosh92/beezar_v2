@@ -30,20 +30,19 @@ class AuthController extends GetxController {
       FacebookPermission.email,
       FacebookPermission.publicProfile
     ]);
-    final accessToken = result.accessToken!.token;
-    FacebookUserProfile? profile = await _facebookLogin.getUserProfile();
-    final facebookEmail = await _facebookLogin.getUserEmail();
-    print(facebookEmail);
-    print(profile!.name);
+
     if (result.status == FacebookLoginStatus.success) {
+      final accessToken = result.accessToken!.token;
+      final facebookEmail = await _facebookLogin.getUserEmail();
+
       http.Response response = await http.post(Hostting.loginGoogle,
-          headers: Hostting().getHeader(), body: {"email":userModel.email});
+          headers: Hostting().getHeader(), body: {"email": facebookEmail});
       if (response.statusCode == 200) {
         final storeg = GetStorage();
         var res = jsonDecode(response.body);
         userModel = UserModel.fromJson(res["user"]);
-        storeg.write("token",accessToken);
-        storeg.write("MyEmail",userModel.email);
+        storeg.write("token", accessToken);
+        storeg.write("MyEmail", userModel.email);
         storeg.write("name", userModel.email);
         storeg.remove("MyPassword");
         return Get.offAll(const HomeScreen());
@@ -52,18 +51,6 @@ class AuthController extends GetxController {
         registerUserModel.name = userModel.email;
         return Get.to(const RegisterScreenOne());
       }
-      // final storeg = GetStorage();
-      // storeg.write("token",accessToken);
-      // storeg.write("name",profile!.name);
-      // storeg.write("MyEmail",facebookEmail);
-
-      // Get.to(const HomeScreen());
-      //  Get.snackbar(
-      //       "مرحباً بك ",
-      //       "أهلا بك${profile.name} بتطبيق بيزار ",
-      //       duration: const Duration(seconds: 3),
-      //       snackPosition: SnackPosition.TOP,
-      //     );
     } else {
       Get.snackbar(
         "هناك مشكلة  ",
@@ -73,39 +60,6 @@ class AuthController extends GetxController {
       );
     }
   }
-
-// Future< void >facebookLogin()async {
-//  FacebookLoginResult result = await _facebookLogin.logIn(
-//   permissions: [FacebookPermission.email, FacebookPermission.publicProfile]);
-//     final accessToken = result.accessToken!.token;
-//      FacebookUserProfile? profile = await _facebookLogin.getUserProfile();
-//     final facebookEmail = await _facebookLogin.getUserEmail();
-//   if(result.status == FacebookLoginStatus.success){
-//      http.Response response = await http.post(Hostting.loginGoogle,
-//             headers: Hostting().getHeader(), body: {"email": facebookEmail});
-//         if (response.statusCode == 200) {
-//           final storeg = GetStorage();
-//           var res = jsonDecode(response.body);
-//           userModel = UserModel.fromJson(res["user"]);
-//           storeg.write("token", accessToken);
-//           storeg.write("MyEmail", userModel.email);
-//           storeg.write("name", userModel.name);
-//           storeg.remove("MyPassword");
-//           return
-//            Get.offAll(const HomeScreen())?.then((value) =>     Get.snackbar(
-//           "مرحباً بك ",
-//           "أهلا بك${profile!.name} بتطبيق بيزار ",
-//           duration: const Duration(seconds: 3),
-//           snackPosition: SnackPosition.TOP,
-//         ));
-
-//         } else {
-//           registerUserModel.email = facebookEmail;
-//           registerUserModel.name = profile!.name;
-//           return Get.to(const RegisterScreenOne());
-//       }
-//   }
-// }
 
   Future<bool> login(String email, String password) async {
     LoginUserModel user = LoginUserModel(email: email, password: password);
