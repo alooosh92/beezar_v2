@@ -16,27 +16,33 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final _dialog = RatingDialog(
-      image: Image.asset('lib/assets/images/logoo 1.png', width: 60,),
-      title: Text('قيم بيزار', textAlign:TextAlign.center ,style: TextStyle(color:ColorManager.darkPrimaryColor),), 
+      image: Image.asset(
+        'lib/assets/images/logoo 1.png',
+        width: 60,
+      ),
+      title: Text(
+        'قيم بيزار',
+        textAlign: TextAlign.center,
+        style: TextStyle(color: ColorManager.darkPrimaryColor),
+      ),
       starSize: 30,
       submitButtonText: 'أرسل',
       commentHint: 'اخبرنا برأيك',
-      onCancelled: ()=>print('cancelled'),
-      onSubmitted: (Response){
-      StoreRedirect.redirect(
-            androidAppId: 'com.beezar.android',
-            iOSAppId: '',
-            );
+      onCancelled: () => print('cancelled'),
+      onSubmitted: (Response) {
+        StoreRedirect.redirect(
+          androidAppId: 'com.beezar.android',
+          iOSAppId: '',
+        );
       },
-      );
-
-
-
+    );
 
     final storeg = GetStorage();
     return Scaffold(
@@ -85,8 +91,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   ProfileButton(
                     press: () => showDialog(
-                      context: context, 
-                      builder: (context)=>_dialog),
+                        context: context, builder: (context) => _dialog),
                     text: "قيم بيزار",
                     icon: Icons.star_border,
                   ),
@@ -101,6 +106,21 @@ class ProfileScreen extends StatelessWidget {
                     },
                     text: "تسجيل الخروج",
                     icon: Icons.logout,
+                  ),
+                  ProfileButton(
+                    press: () async {
+                      var myemail = storeg.read("MyEmail");
+                      if (await canLaunchUrl(Uri.parse(
+                          "whatsapp://send?phone=905318809686&text=الرجاء حذف حسابي $myemail"))) {
+                        launchUrl(Uri.parse(
+                            "whatsapp://send?phone=905318809686&text=الرجاء حذف حسابي $myemail"));
+                      } else {
+                        launchUrl(Uri.parse(
+                            "https://wa.me/?phone=905318809686&text=الرجاء حذف حسابي $myemail"));
+                      }
+                    },
+                    text: "طلب حذف الحساب",
+                    icon: Icons.delete,
                   ),
                 ],
               ),
