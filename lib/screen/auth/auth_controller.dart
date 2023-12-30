@@ -34,21 +34,22 @@ class AuthController extends GetxController {
     if (result.status == FacebookLoginStatus.success) {
       final accessToken = result.accessToken!.token;
       final facebookEmail = await _facebookLogin.getUserEmail();
-
+      FacebookUserProfile? profile = await _facebookLogin.getUserProfile();
       http.Response response = await http.post(Hostting.loginGoogle,
           headers: Hostting().getHeader(), body: {"email": facebookEmail});
       if (response.statusCode == 200) {
+
         final storeg = GetStorage();
         var res = jsonDecode(response.body);
         userModel = UserModel.fromJson(res["user"]);
-        storeg.write("token", accessToken);
+        storeg.write("token",  res["token"]);
         storeg.write("MyEmail", facebookEmail);
-        storeg.write("name", facebookEmail);
+        storeg.write("name", profile!.name);
         storeg.remove("MyPassword");
         return Get.offAll(const HomeScreen());
       } else {
         registerUserModel.email = facebookEmail;
-        registerUserModel.name = facebookEmail;
+        registerUserModel.name = profile!.name;
         return Get.to(const RegisterScreenOne());
       }
     } else {
@@ -145,7 +146,7 @@ class AuthController extends GetxController {
   Future<bool> logout() async {
     http.Response response =
         await http.post(Hostting.logout, headers: Hostting().getHeader());
-    if (response.statusCode == 200 || response.statusCode == 401) {
+    if (response.statusCode == 200) {
       final storeg = GetStorage();
       storeg.remove("token");
       storeg.remove("name");
