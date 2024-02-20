@@ -1,4 +1,4 @@
-//2023-11-23 shaimaa build.gradle
+// 21/2/2024 Shaimaa Make text copyable
 import 'dart:io';
 import 'package:beezer_v2/res/binding_def.dart';
 import 'package:beezer_v2/screen/auth/splash/splash_screen.dart';
