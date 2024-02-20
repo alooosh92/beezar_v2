@@ -31,9 +31,8 @@ class ItemInfoAndButtomScroll extends StatelessWidget {
               width: MediaQuery.sizeOf(context).width - 50,
               child: TextButton(
                 onPressed: () => infoDialog(descrption),
-                child: Text(
+                child: SelectableText(
                   descrption,
-                  overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: FontDef.w400S14Cg,
                 ),

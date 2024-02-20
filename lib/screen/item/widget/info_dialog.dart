@@ -25,7 +25,7 @@ Future<dynamic> infoDialog(String discreption) {
         ],
       ),
       content: SingleChildScrollView(
-        child: Text(
+        child: SelectableText(
           discreption,
           style: FontDef.w700S16Cw,
         ),
